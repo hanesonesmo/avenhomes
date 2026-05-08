@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - Aven Homes</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.mission-img{width:100%;height:440px;object-fit:cover;border-radius:3px;display:block}
+.mission-img-wrap{position:relative}
+.nav-logo img{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f59e0b; /* gold accent */
+}
+.nav-logo span{
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+.exp-badge{position:absolute;bottom:-18px;right:-18px;background:var(--orange);padding:20px 24px;border-radius:3px;text-align:center;box-shadow:0 16px 48px rgba(232,120,10,.4)}
+.exp-badge .n{font-family:Bebas Neue,sans-serif;font-size:2.8rem;line-height:1}
+.exp-badge .l{font-size:.68rem;letter-spacing:1px;opacity:.9}
+.iq{font-family:Cormorant Garamond,serif;font-style:italic;font-size:1.2rem;line-height:1.8;color:rgba(255,255,255,.7);border-left:3px solid var(--orange);padding-left:20px;margin:26px 0}
+.vals{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:56px}
+.vc{background:var(--navy-card);padding:36px 22px;border:1px solid var(--border);text-align:center;transition:transform var(--transition),border-color var(--transition)}
+.vc:hover{transform:translateY(-8px);border-color:rgba(232,120,10,.3)}
+.vi{font-size:2rem;margin-bottom:14px}
+.vn{font-family:Bebas Neue,sans-serif;font-size:1.15rem;letter-spacing:1px;margin-bottom:10px}
+.vd{font-size:.82rem;color:var(--gray);line-height:1.75}
+.sband{background:var(--orange);padding:52px 64px;display:grid;grid-template-columns:repeat(4,1fr);text-align:center}
+.sn{font-family:Bebas Neue,sans-serif;font-size:3.2rem;line-height:1}
+.sl{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.85);margin-top:6px}
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:54px}
+.tc{background:var(--navy-card);border:1px solid var(--border);border-radius:3px;overflow:hidden;transition:transform var(--transition),border-color var(--transition)}
+.tc:hover{transform:translateY(-6px);border-color:rgba(232,120,10,.3)}
+.timg{width:100%;height:200px;object-fit:cover;object-position:top;display:block}
+.ti{padding:20px}
+.tn{font-weight:600;font-size:.93rem;margin-bottom:4px}
+.tr{font-size:.74rem;color:var(--orange);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.tb{font-size:.8rem;color:var(--gray);line-height:1.7}
+.timeline{margin-top:52px}
+.titem{display:grid;grid-template-columns:90px 1fr;gap:24px;margin-bottom:28px;align-items:start}
+.tyear{font-family:Bebas Neue,sans-serif;font-size:2rem;color:var(--orange);line-height:1;padding-top:18px}
+.tcont{padding:20px 22px;background:var(--navy-card);border:1px solid var(--border);border-radius:3px;border-left:3px solid var(--orange)}
+.ttitle{font-weight:600;font-size:.9rem;margin-bottom:6px}
+.ttext{font-size:.81rem;color:var(--gray);line-height:1.7}
+@media(max-width:1024px){.mission-grid{grid-template-columns:1fr;gap:48px}.vals{grid-template-columns:1fr 1fr}.tgrid{grid-template-columns:1fr 1fr}.sband{grid-template-columns:1fr 1fr;padding:36px 32px}}
+@media(max-width:768px){.vals{grid-template-columns:1fr}.tgrid{grid-template-columns:1fr}.sband{grid-template-columns:1fr 1fr;padding:28px 20px}}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav id="nav">
+   <a href="index.html" class="nav-logo">
+      <img src="images/aven-logo.jpeg" alt="Aven Homes Logo">
+      <span>AVEN HOMES</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="reviews.html">Reviews</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get a Quote</a>
+  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-overlay" id="mobileOverlay">
+  <button class="close-btn" onclick="closeMenu()">X</button>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="projects.html" onclick="closeMenu()">Projects</a>
+  <a href="reviews.html" onclick="closeMenu()">Reviews</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-lines"></div>
+  <div class="page-hero-content reveal">
+    <div class="page-eyebrow">Our Story</div>
+    <h1 class="page-title">About <em>Us</em></h1>
+  </div>
+  <div class="page-breadcrumb"><a href="index.html">Home</a> &rsaquo; About</div>
+</div>
+
+<section class="section" style="background:var(--navy-mid)">
+  <div class="container">
+    <div class="mission-grid">
+      <div class="mission-img-wrap reveal-l">
+        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=900&q=80" alt="Team" class="mission-img">
+        <div class="exp-badge"><div class="n">8+</div><div class="l">Years of Excellence</div></div>
+      </div>
+      <div class="reveal-r">
+        <div class="tag">Who We Are</div>
+        <h2 class="heading">Building <em>Tanzania's Future</em></h2>
+        <p class="iq">"We believe every Tanzanian family deserves a beautiful, safe, and affordable home."</p>
+        <p class="body-text" style="margin-bottom:16px">Fine Modern Homes was founded in Dar Es Salaam with a simple but powerful mission: to make quality construction accessible to everyone. What started as a small team of passionate builders has grown into one of Tanzania's most trusted construction companies.</p>
+        <p class="body-text">We combine modern construction technology with deep local expertise to deliver homes that stand the test of time.</p>
+
+        <div style="margin-top:34px;display:flex;gap:14px;flex-wrap:wrap">
+          <a href="contact.html" class="btn btn-primary">Work With Us</a>
+          <a href="projects.html" class="btn btn-ghost">See Our Work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sband">
+  <div class="reveal d1">
+    <div class="sn" data-count="120" data-suffix="+">0</div>
+    <div class="sl">Homes Completed</div></div>
+
+  <div class="reveal d2">
+    <div class="sn" data-count="8" data-suffix="+">0</div>
+    <div class="sl">Years Experience</div></div>
+
+  <div class="reveal d3">
+    <div class="sn" data-count="50" data-suffix="+">0</div>
+    <div class="sl">Team Members</div></div>
+
+  <div class="reveal d4">
+    <div class="sn" data-count="98" data-suffix="%">0</div>
+    <div class="sl">Client Satisfaction</div></div>
+</div>
+
+<section class="section" style="background:var(--navy)">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="tag" style="justify-content:center">Our Foundation</div>
+      <h2 class="heading">The Values We <em>Build On</em></h2>
+    </div>
+    <div class="vals">
+      <div class="vc reveal d1"><div class="vi">&#127942;</div>
+      <div class="vn">Quality</div>
+      <p class="vd">We never compromise. Every brick reflects our commitment to excellence.</p>
+    </div>
+
+      <div class="vc reveal d2">
+        <div class="vi">&#129309;</div>
+        <div class="vn">Integrity</div>
+        <p class="vd">Honest in everything: pricing, timelines, and communication. No surprises.</p>
+    </div>
+
+      <div class="vc reveal d3">
+        <div class="vi">&#128161;</div>
+        <div class="vn">Innovation</div>
+        <p class="vd">We embrace modern techniques to deliver beautiful, functional homes.</p>
+    </div>
+
+      <div class="vc reveal d4">
+        <div class="vi">&#127757;</div>
+        <div class="vn">Community</div>
+        <p class="vd">We invest in local talent and give back to communities where we build.</p>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--navy-mid)">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="tag" style="justify-content:center">The People</div>
+      <h2 class="heading">Meet Our <em>Expert Team</em></h2>
+    </div>
+    <div class="tgrid">
+      <div class="tc reveal d1">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="CEO" class="timg">
+        <div class="ti"><div class="tn">Mohammed Al-Rashid</div>
+        <div class="tr">Founder &amp; CEO</div>
+        <p class="tb">20+ years in construction. Visionary leader who built Fine Modern Homes from the ground up.</p></div></div>
+
+      <div class="tc reveal d2">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Architect" class="timg">
+        <div class="ti"><div class="tn">Amina Saleh</div>
+        <div class="tr">Head Architect</div>
+        <p class="tb">Award-winning architect blending modern aesthetics with African heritage.</p></div></div>
+
+      <div class="tc reveal d3">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Engineer" class="timg">
+        <div class="ti"><div class="tn">David Mwangi</div><div class="tr">Chief Engineer</div>
+        <p class="tb">Structural engineering expert ensuring every foundation is built to last decades.</p></div></div>
+
+      <div class="tc reveal d4">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="PM" class="timg">
+        <div class="ti"><div class="tn">Grace Mmbaga</div>
+        <div class="tr">Project Manager</div>
+        <p class="tb">PMP-certified manager keeping every project on time and stress-free.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--navy)">
+  <div class="container" style="max-width:780px">
+    <div class="reveal" style="text-align:center;margin-bottom:48px">
+
+      <div class="tag" style="justify-content:center">Our Journey</div>
+      <h2 class="heading">How We <em>Grew</em></h2>
+    </div>
+
+    <div class="timeline">
+      <div class="titem reveal"><div class="tyear">2016</div>
+      <div class="tcont"><div class="ttitle">Founded in Dar Es Salaam</div>
+      <p class="ttext">Started with a 5-person team and a vision to make quality construction accessible to all Tanzanians.</p></div></div>
+
+      <div class="titem reveal d1"><div class="tyear">2018</div>
+      <div class="tcont"><div class="ttitle">25th Project Completed</div>
+      <p class="ttext">Hit a major milestone and completed our first large-scale villa project in Mikocheni.</p></div></div>
+
+      <div class="titem reveal d2"><div class="tyear">2020</div>
+      <div class="tcont"><div class="ttitle">Team Expansion</div>
+      <p class="ttext">Grew to 30+ professionals including our in-house architectural design studio.</p></div></div>
+
+      <div class="titem reveal d3"><div class="tyear">2022</div>
+      <div class="tcont"><div class="ttitle">National Recognition</div>
+      <p class="ttext">Awarded Best Construction Company by the Tanzania Real Estate Forum.</p></div></div>
+
+      <div class="titem reveal d4"><div class="tyear">2024</div>
+      <div class="tcont"><div class="ttitle">120+ Homes and Counting</div>
+      <p class="ttext">Operating across Tanzania, delivering 30+ projects per year with 98% client satisfaction.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid container">
+    <div><div class="footer-brand-name">AVEN</em> HOMES</div>
+    <p class="footer-p">Tanzania's trusted partner for quality, affordable, and modern construction.</p></div>
+    <div class="footer-col"><h5>Services</h5>
+        <ul><li><a href="services.html">House Design</a></li>
+            <li><a href="services.html">Construction</a></li>
+            <li><a href="services.html">Building Materials</a></li>
+            <li><a href="services.html">Renovation</a></li>
+        </ul>
+    </div>
+
+    <div class="footer-col"><h5>Company</h5>
+        <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="footer-col"><h5>Contact</h5>
+        <ul>
+            <li><a href="tel:0715172686">0715 172 686</a></li>
+            <li><a href="#">Dar Es Salaam, Tanzania</a></li>
+            <li><a href="https://wa.me/255749557566">WhatsApp Us</a></li>
+        </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom container">
+    <span>2025 <em>Aven Homes</em>. All rights reserved.</span><span>Built with love in Tanzania</span></div>
+</footer>
+
+<a href="https://wa.me/255715172686" class="wa-btn" target="_blank">&#128172;</a>
+<div id="toast"></div>
+<script src="main.js"></script>
+</body>
+</html>

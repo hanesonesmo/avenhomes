@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services – Aven Homes</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.srv-detail {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 72px; align-items: center; margin-bottom: 80px;
+  padding-bottom: 80px; border-bottom: 1px solid var(--border);
+}
+.srv-detail:last-child { border-bottom: none; margin-bottom: 0; }
+.srv-detail.reverse { direction: rtl; }
+.srv-detail.reverse > * { direction: ltr; }
+.srv-img {
+  width: 100%; height: 380px; object-fit: cover;
+  border-radius: 3px; display: block;
+}
+.srv-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 6rem; line-height: 1;
+  color: rgba(232,120,10,0.12); letter-spacing: 4px;
+  margin-bottom: -20px; display: block;
+}
+
+.nav-logo img{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f59e0b; /* gold accent */
+}
+.nav-logo span{
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+.srv-big-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 2px; margin-bottom: 18px;
+}
+.srv-big-name em { color: var(--orange); font-style: normal; }
+.srv-body { color: var(--gray); line-height: 1.9; font-size: 0.95rem; margin-bottom: 24px; }
+.srv-features { list-style: none; margin-bottom: 30px; }
+.srv-features li {
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.88rem; color: rgba(255,255,255,0.8);
+}
+.srv-features li::before { content: '→'; color: var(--orange); font-size: 0.9rem; flex-shrink: 0; }
+
+/* PROCESS */
+.process-steps {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 2px; margin-top: 56px;
+}
+.step {
+  padding: 36px 24px; background: var(--navy-card);
+  border: 1px solid var(--border); position: relative;
+  transition: transform var(--transition), border-color var(--transition);
+}
+.step:hover { transform: translateY(-6px); border-color: rgba(232,120,10,0.3); }
+.step-num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 3rem;
+  color: rgba(232,120,10,0.2); line-height: 1; margin-bottom: 14px;
+}
+.step-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; }
+.step-desc { font-size: 0.8rem; color: var(--gray); line-height: 1.7; }
+
+/* FAQ */
+.faq-list { margin-top: 50px; }
+.faq-item {
+  border-bottom: 1px solid var(--border); overflow: hidden;
+}
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 22px 0; cursor: pointer;
+  font-weight: 500; font-size: 0.95rem;
+  transition: color var(--transition);
+}
+.faq-q:hover { color: var(--orange); }
+.faq-icon { color: var(--orange); font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s;
+  font-size: 0.88rem; color: var(--gray); line-height: 1.8;
+}
+.faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
+
+@media (max-width: 1024px) {
+  .srv-detail { grid-template-columns: 1fr; gap: 40px; }
+  .srv-detail.reverse { direction: ltr; }
+  .srv-img { height: 260px; }
+  .process-steps { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .process-steps { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<nav id="nav">
+   <a href="index.html" class="nav-logo">
+      <img src="images/aven-logo.jpeg" alt="Aven Homes Logo">
+      <span>AVEN <em>HOMES</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="reviews.html">Reviews</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get a Quote</a>
+  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-overlay" id="mobileOverlay">
+  <button class="close-btn" onclick="closeMenu()">✕</button>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="projects.html" onclick="closeMenu()">Projects</a>
+  <a href="reviews.html" onclick="closeMenu()">Reviews</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero" style="background-image: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);">
+  <div class="page-hero-lines"></div>
+  <div class="page-hero-content reveal">
+    <div class="page-eyebrow">What We Offer</div>
+    <h1 class="page-title">Our <em>Services</em></h1>
+  </div>
+  <div class="page-breadcrumb"><a href="index.html">Home</a> › Services</div>
+</div>
+
+<!-- SERVICES DETAIL -->
+<section class="section" style="background: var(--navy-mid);">
+  <div class="container">
+
+    <div class="srv-detail" id="design">
+      <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" alt="House Design" class="srv-img reveal-l">
+      <div class="reveal-r">
+        <span class="srv-number">01</span>
+        <h2 class="srv-big-name">House <em>Design</em></h2>
+        <p class="srv-body">Our architectural team creates stunning, functional homes that reflect your personality and lifestyle. We blend modern innovation with timeless design principles to deliver spaces you'll love for generations.</p>
+        <ul class="srv-features">
+          <li>Custom architectural floor plans</li>
+          <li>3D visualization & walkthroughs</li>
+          <li>Interior & exterior design concepts</li>
+          <li>Structural engineering consultation</li>
+          <li>Permit & compliance documentation</li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary">Request Design Consultation</a>
+      </div>
+    </div>
+
+    <div class="srv-detail reverse" id="construction">
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Construction" class="srv-img reveal-r">
+      <div class="reveal-l">
+        <span class="srv-number">02</span>
+        <h2 class="srv-big-name"><em>Construction</em></h2>
+        <p class="srv-body">From foundation to finishing, our construction team delivers excellence at every step. We use proven methodologies, skilled artisans, and rigorous quality checks to ensure every home meets our exacting standards.</p>
+        <ul class="srv-features">
+          <li>Residential & commercial construction</li>
+          <li>Foundation & structural works</li>
+          <li>Roofing & waterproofing</li>
+          <li>Electrical & plumbing installations</li>
+          <li>Quality inspection at every milestone</li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary">Start Your Build</a>
+      </div>
+    </div>
+
+    <div class="srv-detail" id="materials">
+      <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" alt="Building Materials" class="srv-img reveal-l">
+      <div class="reveal-r">
+        <span class="srv-number">03</span>
+        <h2 class="srv-big-name">Building <em>Materials</em></h2>
+        <p class="srv-body">We supply a comprehensive range of premium, certified building materials directly to your site. Our buying power means you get top-tier products at prices that keep your project within budget.</p>
+        <ul class="srv-features">
+          <li>Cement, steel, and aggregates</li>
+          <li>Tiles, flooring & finishing materials</li>
+          <li>Roofing sheets and insulation</li>
+          <li>Doors, windows & fixtures</li>
+          <li>Bulk supply with delivery to site</li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary">Order Materials</a>
+      </div>
+    </div>
+
+    <div class="srv-detail reverse" id="renovation">
+      <img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=800&q=80" alt="Renovation" class="srv-img reveal-r">
+      <div class="reveal-l">
+        <span class="srv-number">04</span>
+        <h2 class="srv-big-name"><em>Renovation</em></h2>
+        <p class="srv-body">Transform your existing space into something extraordinary. Our renovation specialists assess, plan, and execute upgrades that breathe new life into your home — with minimal disruption to your daily routine.</p>
+        <ul class="srv-features">
+          <li>Full house renovation & remodeling</li>
+          <li>Kitchen & bathroom upgrades</li>
+          <li>Painting, plastering & finishes</li>
+          <li>Space extension & additions</li>
+          <li>Modern facade & landscaping</li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary">Plan Your Renovation</a>
+      </div>
+    </div>
+
+    <div class="srv-detail" id="pm">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="Project Management" class="srv-img reveal-l">
+      <div class="reveal-r">
+        <span class="srv-number">05</span>
+        <h2 class="srv-big-name">Project <em>Management</em></h2>
+        <p class="srv-body">Let us handle the complexity. Our certified project managers coordinate every contractor, supplier, and milestone — delivering your home on time, within scope, and on budget.</p>
+        <ul class="srv-features">
+          <li>Dedicated project manager per client</li>
+          <li>Real-time progress reporting</li>
+          <li>Budget tracking & cost control</li>
+          <li>Contractor & vendor coordination</li>
+          <li>Post-completion warranty support</li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary">Hire a Project Manager</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" style="background: var(--navy);">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="tag" style="justify-content:center">How We Work</div>
+      <h2 class="heading">Our <em>Process</em></h2>
+      <p class="body-text" style="max-width:500px;margin:0 auto">A clear, transparent journey from your first call to handing over the keys.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step reveal d1">
+        <div class="step-num">01</div><div class="step-name">Initial Consultation</div>
+        <p class="step-desc">We listen to your vision, budget, and timeline to understand your needs.</p>
+    </div>
+
+      <div class="step reveal d2">
+        <div class="step-num">02</div><div class="step-name">Design & Planning</div>
+        <p class="step-desc">Our team creates detailed designs and project plans for your approval.</p>
+    </div>
+
+      <div class="step reveal d3">
+        <div class="step-num">03</div><div class="step-name">Quotation</div>
+        <p class="step-desc">Transparent, itemized pricing with no hidden costs or surprises.</p>
+    </div>
+
+      <div class="step reveal d4">
+        <div class="step-num">04</div><div class="step-name">Construction</div>
+        <p class="step-desc">Expert execution with regular updates and quality inspections.</p>
+    </div>
+
+      <div class="step reveal d5">
+        <div class="step-num">05</div><div class="step-name">Handover</div>
+        <p class="step-desc">We deliver your completed home and provide full warranty support.</p>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background: var(--navy-mid);">
+  <div class="container" style="max-width: 780px;">
+    <div class="reveal" style="text-align:center; margin-bottom: 50px">
+      <div class="tag" style="justify-content:center">FAQ</div>
+      <h2 class="heading">Frequently Asked <em>Questions</em></h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How long does it take to build a house? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Typically 4–12 months depending on the size and complexity of the project. A simple 3-bedroom bungalow may take 5–6 months, while a large villa can take up to a year. We provide a detailed timeline before starting.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you offer payment plans? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes. We offer flexible milestone-based payment plans — typically 30% deposit, then payments tied to construction milestones (foundation, roofing, finishing, handover). We'll discuss what works for your situation.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can you work with my own architect's plans? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Absolutely. We're happy to build from your existing approved plans, or collaborate with your architect. We also offer our own in-house design team if you don't have plans yet.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What warranties do you offer? <span class="faq-icon">+</span></div>
+        <div class="faq-a">We provide a 1-year structural warranty on all completed projects. Any defects arising from our workmanship within this period will be rectified at no cost to you.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you work outside Dar Es Salaam? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes! We handle projects across Tanzania including Mwanza, Dodoma, Arusha, and other regions. Transport and accommodation costs for our team are factored into the project quote.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid container">
+    <div><div class="footer-brand-name">AVEN<em>HOMES</em></div>
+    <div class="footer-tagline">We building the future</div>
+    <p class="footer-p">Tanzania's trusted partner for quality, affordable, and modern construction.</p></div>
+    <div class="footer-col"><h5>Services</h5>
+        <ul>
+            <li><a href="#design">House Design</a></li>
+            <li><a href="#construction">Construction</a></li>
+            <li><a href="#materials">Building Materials</a></li>
+            <li><a href="#renovation">Renovation</a></li><li><a href="#pm">Project Management</a></li>
+        </ul>
+    </div>
+
+    <div class="footer-col"><h5>Company</h5>
+        <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="footer-col"><h5>Contact</h5>
+        <ul>
+            <li><a href="tel:0715172686">📞 0749 557 566</a></li>
+            <li><a href="#">📍 Dar Es Salaam, TZ</a></li>
+            <li><a href="https://wa.me/255749557566">💬 WhatsApp</a></li>
+        </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom container">
+    <span>© 2025 <em>Aven Homes</em>. All rights reserved.</span>
+    <span>Built with ❤️ in Tanzania</span></div>
+</footer>
+
+<a href="https://wa.me/255749557566" class="wa-btn" target="_blank">💬</a>
+<div id="toast"></div>
+<script src="main.js"></script>
+<script>
+function toggleFaq(el) {
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
+</script>
+</body>
+</html>

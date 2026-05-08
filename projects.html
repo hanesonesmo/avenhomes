@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects - Fine Modern Homes</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===== PROJECTS PAGE ===== */
+
+/* STATS STRIP */
+.stats-strip {
+  background: var(--navy-card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 36px 64px;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  text-align: center;
+  gap: 2px;
+}
+.strip-num {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.8rem;
+  color: var(--orange);
+  line-height: 1;
+}
+.strip-label {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 5px;
+}
+.nav-logo img{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f59e0b; /* gold accent */
+}
+.nav-logo span{
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+/* FILTER BAR */
+.filter-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.f-btn {
+  padding: 10px 22px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--gray);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.77rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+.f-btn:hover, .f-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+.results-count {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+.results-count em { color: var(--orange); font-style: normal; font-weight: 600; }
+
+/* MASONRY GRID */
+.proj-masonry {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.proj-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  position: relative;
+}
+.proj-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(232,120,10,0.4);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+}
+.proj-card.featured {
+  grid-column: 1 / 3;
+}
+.proj-card.tall {
+  grid-row: span 2;
+}
+.proj-thumb {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s;
+}
+.proj-card.featured .proj-thumb { height: 320px; }
+.proj-card.tall .proj-thumb { height: 100%; min-height: 460px; }
+.proj-card:hover .proj-thumb { transform: scale(1.04); }
+.proj-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8,19,29,0.96) 0%, rgba(8,19,29,0.2) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.proj-card:hover .proj-hover-overlay { opacity: 1; }
+.ph-cat {
+  font-size: 0.68rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 5px;
+}
+.ph-name {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.ph-meta { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
+.proj-view-btn {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--orange);
+  font-weight: 600;
+}
+
+/* PROJ BODY (always visible) */
+.proj-body { padding: 22px 20px; }
+.proj-badge-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.pb-tag {
+  font-size: 0.68rem;
+  padding: 4px 12px;
+  background: rgba(232,120,10,0.1);
+  border: 1px solid rgba(232,120,10,0.2);
+  color: var(--orange);
+  border-radius: 30px;
+}
+.proj-title { font-family: "Bebas Neue", sans-serif;
+ font-size: 1.2rem;
+ letter-spacing: 1px; 
+ margin-bottom: 6px;
+ }
+.proj-blurb { font-size: 0.8rem; color: var(--gray); line-height: 1.7;
+ }
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(4,10,18,0.97);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s;
+  padding: 20px;
+}
+.lightbox.open { 
+  opacity: 1; 
+  pointer-events: all; 
+}
+
+.lb-inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 0;
+  max-width: 1100px;
+  width: 100%;
+  max-height: 90vh;
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  transform: scale(0.92);
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+
+.lightbox.open .lb-inner { transform: scale(1); }
+.lb-img-wrap { position: relative; overflow: hidden; }
+.lb-img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 400px; }
+.lb-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 38px; height: 38px;
+  background: rgba(8,19,29,0.8);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; cursor: pointer; color: var(--white);
+  transition: background var(--transition);
+  z-index: 1;
+}
+.lb-close:hover { background: var(--orange); }
+.lb-info {
+  padding: 44px 40px;
+  display: flex; flex-direction: column; justify-content: center;
+  overflow-y: auto;
+}
+.lb-cat { 
+  font-size: 0.7rem; 
+  letter-spacing: 3px; 
+  text-transform: uppercase; 
+  color: var(--orange); 
+  margin-bottom: 10px; 
+}
+
+.lb-title { 
+  font-family: "Bebas Neue", sans-serif; 
+  font-size: 2rem; 
+  letter-spacing: 1px; 
+  margin-bottom: 16px; 
+  line-height: 1; 
+}
+
+.lb-desc { 
+  font-size: 0.88rem; 
+  color: var(--gray); 
+  line-height: 1.85; 
+  margin-bottom: 28px; 
+}
+
+.lb-specs { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 14px; 
+  margin-bottom: 32px; 
+}
+
+.lb-spec-item{
+  
+}
+.lb-spec-label { 
+  font-size: 0.66rem; 
+  letter-spacing: 2px; 
+  text-transform: uppercase; 
+  color: var(--gray); 
+  margin-bottom: 3px; 
+}
+
+.lb-spec-val { 
+  font-size: 0.9rem; 
+  font-weight: 500; 
+}
+
+.lb-actions { 
+  display: flex; 
+  gap: 12px; 
+  flex-wrap: wrap; 
+}
+
+/* FEATURED SECTION */
+.featured-section {
+  background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-mid) 100%);
+  padding: 80px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  border-top: 1px solid var(--border);
+}
+
+.fs-img { 
+  width: 100%; 
+  height: 400px; 
+  object-fit: cover; 
+  border-radius: 3px; 
+  display: block; 
+}
+
+.fs-eyebrow { 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+  font-size: 0.7rem; 
+  letter-spacing: 2.5px; 
+  text-transform: uppercase; 
+  color: var(--orange); margin-bottom: 14px; 
+  font-weight: 600; 
+}
+
+.fs-eyebrow::before { 
+  content:""; 
+  width:28px; 
+  height:1.5px; 
+  background:var(--orange); 
+}
+
+/* NO RESULTS */
+.no-results {
+  text-align: center; padding: 60px 20px;
+  display: none;
+  grid-column: 1/-1;
+}
+
+.no-results-icon { 
+  font-size: 3rem; 
+  margin-bottom: 16px; 
+}
+
+.no-results h3 { 
+  font-family: "Bebas Neue", sans-serif; 
+  font-size: 1.8rem; 
+  color: var(--orange); 
+  margin-bottom: 8px; 
+}
+.no-results p { 
+  color: var(--gray); 
+  font-size: 0.88rem;
+ }
+
+@media (max-width: 1024px) {
+  .proj-masonry { 
+    grid-template-columns: 1fr 1fr; 
+  }
+
+  .proj-card.featured { 
+    grid-column: 1/-1;
+   }
+
+  .lb-inner { 
+    grid-template-columns: 1fr;
+   }
+
+  .lb-img-wrap { 
+    max-height: 280px; 
+  }
+
+  .stats-strip { 
+    grid-template-columns: 1fr 1fr; 
+    padding: 28px 32px;
+   }
+
+  .featured-section { 
+    grid-template-columns: 1fr; 
+    padding: 56px 32px; 
+  }
+
+}
+@media (max-width: 768px) {
+  .proj-masonry { grid-template-columns: 1fr; }
+  .proj-card.tall { grid-row: span 1; }
+  .proj-card.tall .proj-thumb { min-height: 240px; height: 240px; }
+  .lb-inner { max-height: 95vh; overflow-y: auto; }
+  .lb-info { padding: 28px 24px; }
+  .stats-strip { grid-template-columns: 1fr 1fr; }
+  .featured-section { padding: 48px 20px; gap: 36px; }
+  .filter-wrap { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav id="nav">
+   <a href="index.html" class="nav-logo">
+      <img src="images/aven-logo.jpeg" alt="Aven Homes Logo">
+      <span>AVEN <em>HOMES</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="reviews.html">Reviews</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get a Quote</a>
+  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-overlay" id="mobileOverlay">
+  <button class="close-btn" onclick="closeMenu()">&#10005;</button>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="projects.html" onclick="closeMenu()">Projects</a>
+  <a href="reviews.html" onclick="closeMenu()">Reviews</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero" style="background: linear-gradient(135deg, var(--navy) 0%, #071018 100%)">
+  <div class="page-hero-lines"></div>
+  <div class="page-hero-content reveal">
+    <div class="page-eyebrow">Our Portfolio</div>
+    <h1 class="page-title">Our <em>Projects</em></h1>
+  </div>
+  <div class="page-breadcrumb"><a href="index.html">Home</a> &rsaquo; Projects</div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="reveal d1">
+    <div class="strip-num" data-count="120" data-suffix="+">0</div>
+    <div class="strip-label">Completed Projects</div>
+  </div>
+  <div class="reveal d2">
+    <div class="strip-num" data-count="8" data-suffix="+">0</div>
+    <div class="strip-label">Years of Experience</div>
+  </div>
+  <div class="reveal d3">
+    <div class="strip-num" data-count="6" data-suffix="">0</div>
+    <div class="strip-label">Regions Served</div>
+  </div>
+  <div class="reveal d4">
+    <div class="strip-num" data-count="98" data-suffix="%">0</div>
+    <div class="strip-label">Client Satisfaction</div>
+  </div>
+</div>
+
+<!-- PROJECTS GALLERY -->
+<section class="section" style="background:var(--navy-mid)">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:36px">
+      <div class="tag">Portfolio</div>
+      <h2 class="heading">Every Project a <em>Dream Realized</em></h2>
+      <p class="body-text" style="max-width:520px">Browse our completed projects. Click any card to see full details, specifications, and get inspired for your own home.</p>
+    </div>
+    <div class="filter-wrap reveal">
+      <div class="filter-bar">
+        <button class="f-btn active" onclick="filterPJ(this,'all')">All Projects</button>
+        <button class="f-btn" onclick="filterPJ(this,'construction')">Construction</button>
+        <button class="f-btn" onclick="filterPJ(this,'design')">Design &amp; Build</button>
+        <button class="f-btn" onclick="filterPJ(this,'renovation')">Renovation</button>
+        <button class="f-btn" onclick="filterPJ(this,'commercial')">Commercial</button>
+      </div>
+      <div class="results-count"><em id="projCount">6</em> projects shown</div>
+    </div>
+
+    <div class="proj-masonry" id="projGrid">
+
+      <div class="proj-card featured reveal d1" data-cat="construction"
+        data-name="Naya Villa &mdash; Mikocheni"
+        data-cat-label="Construction"
+        data-img="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=85"
+        data-desc="A stunning 5-bedroom villa completed in 9 months. Features an infinity pool, smart home automation, imported marble flooring, and landscaped gardens spanning 800sqm."
+        data-loc="Mikocheni, Dar Es Salaam"
+        data-year="2024" data-size="450 sqm" data-beds="5 Bedrooms" data-duration="9 Months"
+        onclick="openLightbox(this)">
+        <img class="proj-thumb" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80" alt="Naya Villa">
+        <div class="proj-hover-overlay">
+          <div class="ph-cat">Construction</div>
+          <div class="ph-name">Naya Villa &mdash; Mikocheni</div>
+          <div class="ph-meta">Dar Es Salaam &bull; 2024</div>
+          <div class="proj-view-btn">View Details &#10132;</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-badge-row"><span class="pb-tag">2024</span><span class="pb-tag">Featured</span><span class="pb-tag">Luxury</span></div>
+          <div class="proj-title">Naya Villa &mdash; Mikocheni</div>
+          <p class="proj-blurb">5-bed villa with pool, smart home &amp; imported marble. Completed in 9 months.</p>
+        </div>
+      </div>
+
+      <div class="proj-card tall reveal d2" data-cat="design"
+        data-name="Contemporary Estate"
+        data-cat-label="Design &amp; Build"
+        data-img="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=80"
+        data-desc="A custom-designed estate featuring a main house, guesthouse, double garage, and lush landscaping. Every detail was designed by our in-house team from scratch."
+        data-loc="Msasani Peninsula, Dar Es Salaam"
+        data-year="2024" data-size="620 sqm" data-beds="6 Bedrooms" data-duration="12 Months"
+        onclick="openLightbox(this)">
+        <img class="proj-thumb" src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=80" alt="Contemporary Estate">
+        <div class="proj-hover-overlay">
+          <div class="ph-cat">Design &amp; Build</div>
+          <div class="ph-name">Contemporary Estate</div>
+          <div class="ph-meta">Msasani &bull; 2024</div>
+          <div class="proj-view-btn">View Details &#10132;</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-badge-row"><span class="pb-tag">2024</span><span class="pb-tag">Design &amp; Build</span></div>
+          <div class="proj-title">Contemporary Estate</div>
+          <p class="proj-blurb">Full estate with guesthouse and landscaping on a premium Msasani plot.</p>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d3" data-cat="design"
+        data-name="Modern Bungalow"
+        data-cat-label="Design &amp; Build"
+        data-img="https://images.unsplash.com/photo-1613977257365-aaae5a9817ff?w=800&q=80"
+        data-desc="A 3-bedroom bungalow with open-plan living, sliding glass doors, and a wraparound veranda. Designed for a young family seeking modern comfort."
+        data-loc="Mwanza"
+        data-year="2024" data-size="210 sqm" data-beds="3 Bedrooms" data-duration="5 Months"
+        onclick="openLightbox(this)">
+        <img class="proj-thumb" src="https://images.unsplash.com/photo-1613977257365-aaae5a9817ff?w=600&q=80" alt="Modern Bungalow">
+        <div class="proj-hover-overlay">
+          <div class="ph-cat">Design &amp; Build</div>
+          <div class="ph-name">Modern Bungalow</div>
+          <div class="ph-meta">Mwanza &bull; 2024</div>
+          <div class="proj-view-btn">View Details &#10132;</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-badge-row"><span class="pb-tag">2024</span><span class="pb-tag">Mwanza</span></div>
+          <div class="proj-title">Modern Bungalow</div>
+          <p class="proj-blurb">3-bed bungalow with open-plan living and wraparound veranda.</p>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d1" data-cat="renovation"
+        data-name="Family Residence Upgrade"
+        data-cat-label="Renovation"
+        data-img="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80"
+        data-desc="A complete interior renovation of a 1990s home, transforming it with a new kitchen, master suite, bathrooms, and a fresh contemporary facade. The client was thrilled."
+        data-loc="Dodoma"
+        data-year="2023" data-size="180 sqm" data-beds="4 Bedrooms" data-duration="3 Months"
+        onclick="openLightbox(this)">
+        <img class="proj-thumb" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&q=80" alt="Renovation">
+        <div class="proj-hover-overlay">
+          <div class="ph-cat">Renovation</div>
+          <div class="ph-name">Family Residence Upgrade</div>
+          <div class="ph-meta">Dodoma &bull; 2023</div>
+          <div class="proj-view-btn">View Details &#10132;</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-badge-row"><span class="pb-tag">2023</span><span class="pb-tag">Renovation</span></div>
+          <div class="proj-title">Family Residence Upgrade</div>
+          <p class="proj-blurb">Full interior renovation transforming a 1990s home into a modern masterpiece.</p>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d2" data-cat="construction"
+        data-name="4-Bedroom Contemporary Home"
+        data-cat-label="Construction"
+        data-img="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&q=80"
+        data-desc="A sleek, contemporary 4-bedroom home with floor-to-ceiling windows, a rooftop terrace, and premium finishes throughout. Built on a tight schedule with zero compromises."
+        data-loc="Arusha"
+        data-year="2023" data-size="280 sqm" data-beds="4 Bedrooms" data-duration="7 Months"
+        onclick="openLightbox(this)">
+        <img class="proj-thumb" src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&q=80" alt="Contemporary Home">
+        <div class="proj-hover-overlay">
+          <div class="ph-cat">Construction</div>
+          <div class="ph-name">4-Bedroom Contemporary</div>
+          <div class="ph-meta">Arusha &bull; 2023</div>
+          <div class="proj-view-btn">View Details &#10132;</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-badge-row"><span class="pb-tag">2023</span><span class="pb-tag">Arusha</span></div>
+          <div class="proj-title">Contemporary Home</div>
+          <p class="proj-blurb">4-bed home with rooftop terrace and floor-to-ceiling windows.</p>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d3" data-cat="commercial"
+        data-name="Commercial Office Fit-Out"
+        data-cat-label="Commercial"
+        data-img="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=800&q=80"
+        data-desc="600sqm open-plan office renovation for a financial services firm. Included custom joinery, acoustic ceiling panels, a boardroom, and a client lounge area."
+        data-loc="CBD, Dar Es Salaam"
+        data-year="2023" data-size="600 sqm" data-beds="Commercial" data-duration="4 Months"
+        onclick="openLightbox(this)">
+        <img class="proj-thumb" src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=600&q=80" alt="Office">
+        <div class="proj-hover-overlay">
+          <div class="ph-cat">Commercial</div>
+          <div class="ph-name">Office Fit-Out</div>
+          <div class="ph-meta">Dar Es Salaam CBD &bull; 2023</div>
+          <div class="proj-view-btn">View Details &#10132;</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-badge-row"><span class="pb-tag">2023</span><span class="pb-tag">Commercial</span></div>
+          <div class="proj-title">Commercial Office Fit-Out</div>
+          <p class="proj-blurb">600sqm office renovation with custom joinery and acoustic panels.</p>
+        </div>
+      </div>
+
+      <div class="no-results" id="noResults">
+        <div class="no-results-icon">&#127968;</div>
+        <h3>No Projects Found</h3>
+        <p>No projects match this filter. Try another category.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED CASE STUDY -->
+<section class="featured-section reveal">
+  <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=85" alt="Featured project" class="fs-img">
+  <div>
+    <div class="fs-eyebrow">Case Study</div>
+    <h2 class="heading" style="font-size:clamp(2rem,4vw,3rem)">Private <em>Estate</em><br>Dar Es Salaam</h2>
+    <p class="body-text" style="margin-bottom:20px">Our most ambitious project to date: a gated 800sqm estate with a main house, two guest villas, a swimming pool, and fully landscaped gardens. Delivered in 14 months.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0">
+      <div><div style="font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:4px">Size</div><div style="font-weight:600">800 sqm Total</div></div>
+      <div><div style="font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:4px">Rooms</div><div style="font-weight:600">7 Beds + 2 Villas</div></div>
+      <div><div style="font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:4px">Duration</div><div style="font-weight:600">14 Months</div></div>
+      <div><div style="font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:4px">Location</div><div style="font-weight:600">Dar Es Salaam</div></div>
+    </div>
+    <a href="contact.html" class="btn btn-primary">Start a Similar Project &#10132;</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="background:var(--navy-mid);padding:80px 64px;text-align:center;border-top:1px solid var(--border)" class="reveal">
+  <div class="tag" style="justify-content:center">Your Turn</div>
+  <h2 class="heading">Ready to Build Your <em>Dream Home?</em></h2>
+  <p class="body-text" style="max-width:480px;margin:0 auto 32px">Join 120+ happy Tanzanian families who trusted Fine Modern Homes to build their dream.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <a href="contact.html" class="btn btn-primary">Get a Free Quote</a>
+    <a href="tel:0749557566" class="btn btn-ghost">&#128222; 0749 557 566</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid container">
+    <div>
+      <div class="footer-brand-name">AVEN <em>HOMES</em></div>
+      <div class="footer-tagline">We building the future</div>
+      <p class="footer-p">Tanzania's trusted partner for quality, affordable construction.</p>
+    </div>
+    <div class="footer-col"><h5>Services</h5><ul>
+      <li><a href="services.html">House Design</a></li>
+      <li><a href="services.html">Construction</a></li>
+      <li><a href="services.html">Building Materials</a></li>
+      <li><a href="services.html">Renovation</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Company</h5><ul>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Contact</h5><ul>
+      <li><a href="tel:0715172686">&#128222; 0749 557 566</a></li>
+      <li><a href="https://wa.me/255749557566">&#128172; WhatsApp</a></li>
+      <li><a href="#">&#128205; Dar Es Salaam, TZ</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom container">
+    <span>&copy; 2025 <em>Aven Homes</em>. All rights reserved.</span>
+    <span>Built with &#10084; in Tanzania</span>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <div class="lb-inner" id="lbInner">
+    <div class="lb-img-wrap">
+      <img id="lbImg" src="" alt="" class="lb-img">
+      <button class="lb-close" onclick="closeLightbox()">&#10005;</button>
+    </div>
+    <div class="lb-info">
+      <div class="lb-cat" id="lbCat"></div>
+      <div class="lb-title" id="lbTitle"></div>
+      <p class="lb-desc" id="lbDesc"></p>
+      <div class="lb-specs">
+        <div class="lb-spec-item"><div class="lb-spec-label">Location</div><div class="lb-spec-val" id="lbLoc"></div></div>
+        <div class="lb-spec-item"><div class="lb-spec-label">Year</div><div class="lb-spec-val" id="lbYear"></div></div>
+        <div class="lb-spec-item"><div class="lb-spec-label">Floor Area</div><div class="lb-spec-val" id="lbSize"></div></div>
+        <div class="lb-spec-item"><div class="lb-spec-label">Type</div><div class="lb-spec-val" id="lbBeds"></div></div>
+        <div class="lb-spec-item"><div class="lb-spec-label">Duration</div><div class="lb-spec-val" id="lbDuration"></div></div>
+      </div>
+      <div class="lb-actions">
+        <a href="contact.html" class="btn btn-primary">Start Similar Project</a>
+        <button class="btn btn-ghost" onclick="closeLightbox()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="https://wa.me/255749557566" class="wa-btn" target="_blank">&#128172;</a>
+<div id="toast"></div>
+<script src="main.js"></script>
+<script>
+// Filter
+function filterPJ(btn, cat) {
+  document.querySelectorAll(".f-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  let count = 0;
+  document.querySelectorAll(".proj-card").forEach(card => {
+    const match = cat === "all" || card.dataset.cat === cat;
+    card.style.display = match ? "" : "none";
+    if (match) count++;
+  });
+  document.getElementById("projCount").textContent = count;
+  document.getElementById("noResults").style.display = count === 0 ? "block" : "none";
+  // Remove featured class when filtering
+  document.querySelectorAll(".proj-card.featured").forEach(c => {
+    if (cat !== "all") c.classList.remove("featured");
+    else c.classList.add("featured");
+  });
+}
+
+// Lightbox
+function openLightbox(card) {
+  const d = card.dataset;
+  document.getElementById("lbImg").src = d.img;
+  document.getElementById("lbImg").alt = d.name;
+  document.getElementById("lbCat").textContent = d.catLabel;
+  document.getElementById("lbTitle").textContent = d.name;
+  document.getElementById("lbDesc").textContent = d.desc;
+  document.getElementById("lbLoc").textContent = d.loc;
+  document.getElementById("lbYear").textContent = d.year;
+  document.getElementById("lbSize").textContent = d.size;
+  document.getElementById("lbBeds").textContent = d.beds;
+  document.getElementById("lbDuration").textContent = d.duration;
+  document.getElementById("lightbox").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeLightbox() {
+  document.getElementById("lightbox").classList.remove("open");
+  document.body.style.overflow = "";
+}
+function closeLightboxOutside(e) {
+  if (e.target.id === "lightbox") closeLightbox();
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Reviews - Aven Homes</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===== REVIEWS PAGE ===== */
+
+/* HERO RATING PANEL */
+.rating-hero {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 60px;
+  align-items: center;
+  padding: 56px 60px;
+  margin-bottom: 64px;
+}
+.big-score {
+  text-align: center;
+  padding-right: 40px;
+  border-right: 1px solid var(--border);
+}
+.big-score-num {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--orange);
+}
+.big-score-stars {
+  font-size: 1.1rem;
+  letter-spacing: 4px;
+  color: var(--orange);
+  margin: 6px 0;
+}
+.big-score-sub {
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* BAR RATINGS */
+.rating-bars { min-width: 260px; }
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 13px;
+}
+.bar-lbl {
+  font-size: 0.8rem;
+  color: var(--gray);
+  width: 48px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.bar-track {
+  flex: 1;
+  height: 7px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--orange), var(--orange-glow));
+  border-radius: 4px;
+  width: 0%;
+  transition: width 1.4s cubic-bezier(0.22,1,0.36,1);
+}
+.bar-pct {
+  font-size: 0.75rem;
+  color: var(--gray);
+  width: 36px;
+  flex-shrink: 0;
+}
+.nav-logo img{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f59e0b; /* gold accent */
+}
+.nav-logo span{
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+/* SERVICE BREAKDOWN */
+.service-ratings {
+  padding-left: 40px;
+  border-left: 1px solid var(--border);
+}
+.service-ratings h4 {
+  font-size: 0.68rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.svc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.svc-name { font-size: 0.84rem; color: rgba(255,255,255,0.75); }
+.svc-stars { color: var(--orange); font-size: 0.75rem; letter-spacing: 2px; }
+
+/* FILTER TABS */
+.review-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.rf-btn {
+  padding: 9px 20px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--gray);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+.rf-btn:hover, .rf-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+
+/* REVIEWS GRID */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.rev-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 34px 30px;
+  border-top: 3px solid transparent;
+  transition: border-top-color var(--transition), transform var(--transition);
+  position: relative;
+}
+.rev-card::before {
+  content: "\201C";
+  position: absolute;
+  top: 16px; right: 22px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: rgba(232,120,10,0.1);
+  pointer-events: none;
+}
+.rev-card:hover {
+  border-top-color: var(--orange);
+  transform: translateY(-5px);
+}
+.rev-card.featured-review {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+  background: linear-gradient(135deg, var(--navy-card) 0%, var(--navy-light) 100%);
+  border-top: 3px solid var(--orange);
+}
+.rev-stars { color: var(--orange); font-size: 0.82rem; letter-spacing: 3px; margin-bottom: 14px; }
+.rev-quote {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 0.98rem;
+  line-height: 1.88;
+  color: rgba(255,255,255,0.78);
+  margin-bottom: 22px;
+}
+.rev-card.featured-review .rev-quote {
+  font-size: 1.15rem;
+}
+.rev-author { display: flex; align-items: center; gap: 14px; }
+.rev-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange), var(--orange-glow));
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.rev-name { font-weight: 600; font-size: 0.9rem; }
+.rev-meta { font-size: 0.74rem; color: var(--gray); margin-top: 3px; }
+.rev-service-badge {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 14px;
+  background: rgba(232,120,10,0.1);
+  border: 1px solid rgba(232,120,10,0.2);
+  color: var(--orange);
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 30px;
+}
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  color: #4ade80;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* FEATURED AUTHOR IMG */
+.featured-author-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--orange);
+  flex-shrink: 0;
+}
+
+/* WRITE REVIEW */
+.write-section {
+  background: var(--navy);
+}
+.write-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 60px;
+  align-items: start;
+}
+.write-info h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2rem; letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+.write-info h3 em { color: var(--orange); font-style: normal; }
+.write-info p { font-size: 0.88rem; color: var(--gray); line-height: 1.8; margin-bottom: 28px; }
+.write-perks { display: flex; flex-direction: column; gap: 14px; }
+.write-perk {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.84rem; color: rgba(255,255,255,0.75);
+}
+.write-perk::before {
+  content: "\2714";
+  color: var(--orange);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.write-box {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 48px 44px;
+}
+.write-box-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.7rem; letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.write-box-title em { color: var(--orange); font-style: normal; }
+.write-box-sub {
+  font-size: 0.82rem; color: var(--gray);
+  margin-bottom: 32px; line-height: 1.6;
+}
+
+/* STAR PICKER */
+.star-picker { display: flex; gap: 10px; margin-bottom: 24px; }
+.star-pick {
+  font-size: 2rem;
+  cursor: pointer;
+  color: rgba(255,255,255,0.15);
+  transition: color 0.2s, transform 0.2s;
+  background: none; border: none; padding: 0;
+  line-height: 1;
+}
+.star-pick.lit { color: var(--orange); }
+.star-pick:hover { transform: scale(1.2); }
+
+.char-indicator {
+  font-size: 0.72rem;
+  color: var(--gray);
+  text-align: right;
+  margin-top: 5px;
+}
+
+.submit-review-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 2px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-top: 8px;
+}
+.submit-review-btn:hover {
+  background: var(--orange-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(232,120,10,0.3);
+}
+.submit-review-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.review-success {
+  display: none;
+  text-align: center;
+  padding: 50px 20px;
+}
+.rs-circle {
+  width: 72px; height: 72px;
+  background: rgba(232,120,10,0.12);
+  border: 2px solid var(--orange);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem;
+  margin: 0 auto 20px;
+  animation: popIn 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes popIn { from{transform:scale(0.5);opacity:0} to{transform:scale(1);opacity:1} }
+.review-success h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.9rem; letter-spacing: 1px;
+  color: var(--orange); margin-bottom: 10px;
+}
+.review-success p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; max-width: 360px; margin: 0 auto; }
+
+/* TRUST BADGES */
+.trust-bar {
+  background: var(--navy-card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+.trust-icon { font-size: 1.3rem; }
+.trust-item strong { color: var(--white); font-weight: 600; display: block; margin-bottom: 1px; }
+
+@media (max-width: 1100px) {
+  .rating-hero { grid-template-columns: auto 1fr; gap: 36px; }
+  .service-ratings { display: none; }
+  .reviews-grid { grid-template-columns: 1fr 1fr; }
+  .rev-card.featured-review { grid-column: 1/-1; }
+  .write-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .rating-hero { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; }
+  .big-score { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .rev-card.featured-review { grid-template-columns: 1fr; }
+  .featured-author-img { display: none; }
+  .write-box { padding: 32px 22px; }
+  .trust-bar { gap: 28px; padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav id="nav">
+   <a href="index.html" class="nav-logo">
+      <img src="images/aven-logo.jpeg" alt="Aven Homes Logo">
+      <span>AVEN <em>HOMES</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="reviews.html" class="active">Reviews</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Get a Quote</a>
+  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-overlay" id="mobileOverlay">
+  <button class="close-btn" onclick="closeMenu()">&#10005;</button>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="projects.html" onclick="closeMenu()">Projects</a>
+  <a href="reviews.html" onclick="closeMenu()">Reviews</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-lines"></div>
+  <div class="page-hero-content reveal">
+    <div class="page-eyebrow">Client Voices</div>
+    <h1 class="page-title">Client <em>Reviews</em></h1>
+  </div>
+  <div class="page-breadcrumb"><a href="index.html">Home</a> &rsaquo; Reviews</div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-icon">&#127942;</span><div><strong>Verified Reviews</strong>All from real clients</div></div>
+  <div class="trust-item"><span class="trust-icon">&#9733;</span><div><strong>4.9 / 5.0</strong>Average rating</div></div>
+  <div class="trust-item"><span class="trust-icon">&#128100;</span><div><strong>98+ Reviews</strong>And counting</div></div>
+  <div class="trust-item"><span class="trust-icon">&#127975;</span><div><strong>8 Years</strong>Serving Tanzania</div></div>
+</div>
+
+<!-- REVIEWS MAIN -->
+<section class="section" style="background:var(--navy-mid)">
+  <div class="container">
+
+    <!-- RATING SUMMARY -->
+    <div class="rating-hero reveal">
+      <div class="big-score">
+        <div class="big-score-num">4.9</div>
+        <div class="big-score-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="big-score-sub">98 Reviews</div>
+      </div>
+      <div class="rating-bars">
+        <div class="bar-row"><span class="bar-lbl">5 &#9733;</span><div class="bar-track"><div class="bar-fill" data-w="88%"></div></div><span class="bar-pct">88%</span></div>
+        <div class="bar-row"><span class="bar-lbl">4 &#9733;</span><div class="bar-track"><div class="bar-fill" data-w="9%"></div></div><span class="bar-pct">9%</span></div>
+        <div class="bar-row"><span class="bar-lbl">3 &#9733;</span><div class="bar-track"><div class="bar-fill" data-w="2%"></div></div><span class="bar-pct">2%</span></div>
+        <div class="bar-row"><span class="bar-lbl">2 &#9733;</span><div class="bar-track"><div class="bar-fill" data-w="1%"></div></div><span class="bar-pct">1%</span></div>
+        <div class="bar-row"><span class="bar-lbl">1 &#9733;</span><div class="bar-track"><div class="bar-fill" data-w="0%"></div></div><span class="bar-pct">0%</span></div>
+      </div>
+      <div class="service-ratings">
+        <h4>By Service</h4>
+        <div class="svc-row"><span class="svc-name">Construction</span><span class="svc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+        <div class="svc-row"><span class="svc-name">House Design</span><span class="svc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+        <div class="svc-row"><span class="svc-name">Building Materials</span><span class="svc-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span></div>
+        <div class="svc-row"><span class="svc-name">Renovation</span><span class="svc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+        <div class="svc-row"><span class="svc-name">Project Management</span><span class="svc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+      </div>
+    </div>
+
+    <!-- FILTER -->
+    <div class="review-filter reveal">
+      <button class="rf-btn active" onclick="filterReviews(this,'all')">All Reviews</button>
+      <button class="rf-btn" onclick="filterReviews(this,'construction')">Construction</button>
+      <button class="rf-btn" onclick="filterReviews(this,'design')">House Design</button>
+      <button class="rf-btn" onclick="filterReviews(this,'renovation')">Renovation</button>
+      <button class="rf-btn" onclick="filterReviews(this,'materials')">Materials</button>
+    </div>
+
+    <!-- REVIEWS GRID -->
+    <div class="reviews-grid" id="reviewsGrid">
+
+      <!-- FEATURED REVIEW -->
+      <div class="rev-card featured-review reveal" data-svc="construction">
+        <div>
+          <div class="verified-badge">&#10003; Verified Client</div>
+          <div class="rev-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+          <p class="rev-quote">"Fine Modern Homes exceeded every single expectation we had. From the initial consultation to the final handover, the team was professional, communicative, and genuinely cared about delivering a home we would love. The quality of construction and materials is exceptional &mdash; I have friends who spent far more and got far less. I would recommend them without any hesitation whatsoever."</p>
+          <div class="rev-author">
+            <div class="rev-avatar">AM</div>
+            <div>
+              <div class="rev-name">Amina Mkwawa</div>
+              <div class="rev-meta">Dar Es Salaam &bull; March 2024</div>
+              <span class="rev-service-badge">Construction</span>
+            </div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&q=80" alt="Project" class="featured-author-img" style="border-radius:4px;width:200px;height:160px;object-fit:cover;">
+      </div>
+
+      <div class="rev-card reveal d1" data-svc="construction">
+        <div class="verified-badge">&#10003; Verified Client</div>
+        <div class="rev-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rev-quote">"Professional team, affordable prices, delivered on time. The project manager called us every week with updates. I couldn't have asked for a better construction partner for our family home."</p>
+        <div class="rev-author">
+          <div class="rev-avatar">JK</div>
+          <div>
+            <div class="rev-name">Joseph Kamau</div>
+            <div class="rev-meta">Mwanza &bull; February 2024</div>
+            <span class="rev-service-badge">Construction</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-card reveal d2" data-svc="renovation">
+        <div class="verified-badge">&#10003; Verified Client</div>
+        <div class="rev-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rev-quote">"The renovation of our home was handled beautifully. Our old house now looks brand new &mdash; modern, elegant and exactly what I envisioned. The team worked clean and finished on schedule."</p>
+        <div class="rev-author">
+          <div class="rev-avatar">FN</div>
+          <div>
+            <div class="rev-name">Fatuma Njema</div>
+            <div class="rev-meta">Dodoma &bull; January 2024</div>
+            <span class="rev-service-badge">Renovation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-card reveal d1" data-svc="design">
+        <div class="verified-badge">&#10003; Verified Client</div>
+        <div class="rev-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rev-quote">"The design team understood our vision immediately. They created something beautiful that we never could have imagined on our own. The 3D walkthrough before construction was incredibly reassuring."</p>
+        <div class="rev-author">
+          <div class="rev-avatar">SA</div>
+          <div>
+            <div class="rev-name">Salma Aboud</div>
+            <div class="rev-meta">Dar Es Salaam &bull; October 2023</div>
+            <span class="rev-service-badge">House Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-card reveal d2" data-svc="construction">
+        <div class="verified-badge">&#10003; Verified Client</div>
+        <div class="rev-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rev-quote">"I was skeptical at first but Fine Modern Homes proved me wrong at every step. The construction quality is top-tier and the prices are genuinely fair. Finished 2 weeks ahead of schedule!"</p>
+        <div class="rev-author">
+          <div class="rev-avatar">BM</div>
+          <div>
+            <div class="rev-name">Brian Msemwa</div>
+            <div class="rev-meta">Arusha &bull; November 2023</div>
+            <span class="rev-service-badge">Construction</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-card reveal d3" data-svc="materials">
+        <div class="verified-badge">&#10003; Verified Client</div>
+        <div class="rev-stars">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
+        <p class="rev-quote">"Excellent materials at very fair prices. I bought cement, tiles and roofing supplies. Delivery was on time and everything was exactly as described. Will definitely order again."</p>
+        <div class="rev-author">
+          <div class="rev-avatar">PM</div>
+          <div>
+            <div class="rev-name">Peter Mwakalobo</div>
+            <div class="rev-meta">Mbeya &bull; September 2023</div>
+            <span class="rev-service-badge">Building Materials</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-card reveal d1" data-svc="renovation">
+        <div class="verified-badge">&#10003; Verified Client</div>
+        <div class="rev-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rev-quote">"Our kitchen and bathrooms are completely transformed. The tiling work is impeccable, the fittings are premium, and the team was respectful of our home during the entire renovation. Absolutely love it."</p>
+        <div class="rev-author">
+          <div class="rev-avatar">RH</div>
+          <div>
+            <div class="rev-name">Rose Hassan</div>
+            <div class="rev-meta">Dar Es Salaam &bull; August 2023</div>
+            <span class="rev-service-badge">Renovation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-card reveal d2" data-svc="design">
+        <div class="verified-badge">&#10003; Verified Client</div>
+        <div class="rev-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rev-quote">"The architectural drawings were detailed, creative and delivered quickly. When I made changes they were accommodating. The final design is better than anything I found online. Highly recommend."</p>
+        <div class="rev-author">
+          <div class="rev-avatar">TM</div>
+          <div>
+            <div class="rev-name">Thomas Mushi</div>
+            <div class="rev-meta">Moshi &bull; July 2023</div>
+            <span class="rev-service-badge">House Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-card reveal d3" data-svc="construction">
+        <div class="verified-badge">&#10003; Verified Client</div>
+        <div class="rev-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rev-quote">"From day one to handover day, this team was outstanding. The foundation work, the walls, the roofing &mdash; all done with precision. My neighbors keep asking me who built it. I am proud to recommend them."</p>
+        <div class="rev-author">
+          <div class="rev-avatar">LM</div>
+          <div>
+            <div class="rev-name">Lucia Mwenda</div>
+            <div class="rev-meta">Dar Es Salaam &bull; May 2023</div>
+            <span class="rev-service-badge">Construction</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WRITE A REVIEW -->
+<section class="section write-section">
+  <div class="container">
+    <div class="write-layout">
+      <div class="write-info reveal-l">
+        <div class="tag">Share Your Experience</div>
+        <h3>Leave a <em>Review</em></h3>
+        <p>Were you a client? Your honest feedback helps future clients make informed decisions and helps us continue to improve our services across Tanzania.</p>
+        <div class="write-perks">
+          <div class="write-perk">Takes less than 2 minutes to complete</div>
+          <div class="write-perk">All reviews are verified before publishing</div>
+          <div class="write-perk">Your privacy is fully respected</div>
+          <div class="write-perk">Help other Tanzanians build with confidence</div>
+        </div>
+      </div>
+      <div class="write-box reveal-r">
+        <div id="reviewFormWrap">
+          <div class="write-box-title">Your <em>Review</em></div>
+          <p class="write-box-sub">Share your experience with Fine Modern Homes</p>
+
+          <div class="form-group">
+            <label>Your Rating *</label>
+            <div class="star-picker" id="starPicker">
+              <button class="star-pick" data-val="1" onclick="pickStar(1)">&#9733;</button>
+              <button class="star-pick" data-val="2" onclick="pickStar(2)">&#9733;</button>
+              <button class="star-pick" data-val="3" onclick="pickStar(3)">&#9733;</button>
+              <button class="star-pick" data-val="4" onclick="pickStar(4)">&#9733;</button>
+              <button class="star-pick" data-val="5" onclick="pickStar(5)">&#9733;</button>
+            </div>
+            <div id="ratingLabel" style="font-size:.8rem;color:var(--gray);min-height:18px"></div>
+          </div>
+
+          <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div>
+              <label>First Name *</label>
+              <input type="text" id="rname" class="form-control" placeholder="Amina">
+            </div>
+            <div>
+              <label>Location *</label>
+              <input type="text" id="rloc" class="form-control" placeholder="Dar Es Salaam">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Service Used *</label>
+            <select id="rsvc" class="form-control">
+              <option value="">Select the service you used...</option>
+              <option>Construction</option>
+              <option>House Design</option>
+              <option>Building Materials</option>
+              <option>Renovation</option>
+              <option>Project Management</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Your Review *</label>
+            <textarea id="rmsg" class="form-control" maxlength="600" oninput="updateRevCount(this)" placeholder="Tell others about your experience with Fine Modern Homes. What did you hire them for? How was the quality, communication, and delivery?"></textarea>
+            <div class="char-indicator"><span id="revCharCount">0</span>/600 characters</div>
+          </div>
+
+          <button class="submit-review-btn" id="revSubmitBtn" onclick="submitReview()">
+            Submit My Review &#9733;
+          </button>
+        </div>
+        <div class="review-success" id="reviewSuccess">
+          <div class="rs-circle">&#9733;</div>
+          <h3>Thank You!</h3>
+          <p>Your review has been submitted and will be published after verification. We truly appreciate your trust in Fine Modern Homes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="background:var(--navy-light);padding:72px 64px;text-align:center;border-top:1px solid var(--border)" class="reveal">
+  <div class="tag" style="justify-content:center">Ready to Join Them?</div>
+  <h2 class="heading">Build Your <em>Dream Home</em> Today</h2>
+  <p class="body-text" style="max-width:460px;margin:0 auto 32px">Join 120+ happy Tanzanian families. Get your free consultation and quote today.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <a href="contact.html" class="btn btn-primary">Get a Free Quote</a>
+    <a href="projects.html" class="btn btn-ghost">See Our Projects</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid container">
+    <div>
+      <div class="footer-brand-name">AVEN <em>HOMES</em></div>
+      <div class="footer-tagline">We building the future</div>
+      <p class="footer-p">Tanzania's trusted partner for quality, affordable, and modern construction solutions.</p>
+    </div>
+    <div class="footer-col"><h5>Services</h5><ul>
+      <li><a href="services.html">House Design</a></li>
+      <li><a href="services.html">Construction</a></li>
+      <li><a href="services.html">Building Materials</a></li>
+      <li><a href="services.html">Renovation</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Company</h5><ul>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Contact</h5><ul>
+      <li><a href="tel:0715172686">&#128222; 0749 557 566</a></li>
+      <li><a href="https://wa.me/255749557566">&#128172; WhatsApp</a></li>
+      <li><a href="mailto:info@finemodern.co.tz">&#128140; Email Us</a></li>
+      <li><a href="#">&#128205; Dar Es Salaam, TZ</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom container">
+    <span>&copy; 2025 <em>Aven Homes</em>. All rights reserved.</span>
+    <span>Built with &#10084; in Tanzania</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/255749557566" class="wa-btn" target="_blank" title="Chat on WhatsApp">&#128172;</a>
+<div id="toast"></div>
+<script src="main.js"></script>
+<script>
+// Animate rating bars when visible
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll(".bar-fill").forEach(b => { b.style.width = b.dataset.w; });
+      barObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+const rh = document.querySelector(".rating-hero");
+if (rh) barObs.observe(rh);
+
+// Filter reviews
+function filterReviews(btn, svc) {
+  document.querySelectorAll(".rf-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  document.querySelectorAll(".rev-card").forEach(card => {
+    const match = svc === "all" || card.dataset.svc === svc;
+    card.style.display = match ? "" : "none";
+  });
+}
+
+// Star rating
+let selectedStars = 0;
+const ratingLabels = ["", "Poor", "Fair", "Good", "Very Good", "Excellent!"];
+function pickStar(val) {
+  selectedStars = val;
+  document.querySelectorAll(".star-pick").forEach((s,i) => s.classList.toggle("lit", i < val));
+  document.getElementById("ratingLabel").textContent = ratingLabels[val];
+}
+
+function updateRevCount(el) {
+  document.getElementById("revCharCount").textContent = el.value.length;
+}
+
+function submitReview() {
+  const name = document.getElementById("rname").value.trim();
+  const loc = document.getElementById("rloc").value.trim();
+  const svc = document.getElementById("rsvc").value;
+  const msg = document.getElementById("rmsg").value.trim();
+  if (!name) { showToast("Please enter your name."); return; }
+  if (!loc) { showToast("Please enter your location."); return; }
+  if (!selectedStars) { showToast("Please select a star rating."); return; }
+  if (!svc) { showToast("Please select the service you used."); return; }
+  if (msg.length < 30) { showToast("Please write at least 30 characters."); return; }
+  const btn = document.getElementById("revSubmitBtn");
+  btn.disabled = true;
+  btn.textContent = "Submitting...";
+  setTimeout(() => {
+    document.getElementById("reviewFormWrap").style.display = "none";
+    document.getElementById("reviewSuccess").style.display = "block";
+  }, 1400);
+}
+</script>
+</body>
+</html>
