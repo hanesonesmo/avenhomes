@@ -4,104 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services – Aven Homes</title>
-<link rel="stylesheet" href="style.css">
-<style>
-.srv-detail {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 72px; align-items: center; margin-bottom: 80px;
-  padding-bottom: 80px; border-bottom: 1px solid var(--border);
-}
-.srv-detail:last-child { border-bottom: none; margin-bottom: 0; }
-.srv-detail.reverse { direction: rtl; }
-.srv-detail.reverse > * { direction: ltr; }
-.srv-img {
-  width: 100%; height: 380px; object-fit: cover;
-  border-radius: 3px; display: block;
-}
-.srv-number {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 6rem; line-height: 1;
-  color: rgba(232,120,10,0.12); letter-spacing: 4px;
-  margin-bottom: -20px; display: block;
-}
-
-.nav-logo img{
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #f59e0b; /* gold accent */
-}
-.nav-logo span{
-    font-size: 20px;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: 2px;
-}
-.srv-big-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 2px; margin-bottom: 18px;
-}
-.srv-big-name em { color: var(--orange); font-style: normal; }
-.srv-body { color: var(--gray); line-height: 1.9; font-size: 0.95rem; margin-bottom: 24px; }
-.srv-features { list-style: none; margin-bottom: 30px; }
-.srv-features li {
-  padding: 10px 0; border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; gap: 12px;
-  font-size: 0.88rem; color: rgba(255,255,255,0.8);
-}
-.srv-features li::before { content: '→'; color: var(--orange); font-size: 0.9rem; flex-shrink: 0; }
-
-/* PROCESS */
-.process-steps {
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 2px; margin-top: 56px;
-}
-.step {
-  padding: 36px 24px; background: var(--navy-card);
-  border: 1px solid var(--border); position: relative;
-  transition: transform var(--transition), border-color var(--transition);
-}
-.step:hover { transform: translateY(-6px); border-color: rgba(232,120,10,0.3); }
-.step-num {
-  font-family: 'Bebas Neue', sans-serif; font-size: 3rem;
-  color: rgba(232,120,10,0.2); line-height: 1; margin-bottom: 14px;
-}
-.step-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; }
-.step-desc { font-size: 0.8rem; color: var(--gray); line-height: 1.7; }
-
-/* FAQ */
-.faq-list { margin-top: 50px; }
-.faq-item {
-  border-bottom: 1px solid var(--border); overflow: hidden;
-}
-.faq-q {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 22px 0; cursor: pointer;
-  font-weight: 500; font-size: 0.95rem;
-  transition: color var(--transition);
-}
-.faq-q:hover { color: var(--orange); }
-.faq-icon { color: var(--orange); font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; }
-.faq-item.open .faq-icon { transform: rotate(45deg); }
-.faq-a {
-  max-height: 0; overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.4s;
-  font-size: 0.88rem; color: var(--gray); line-height: 1.8;
-}
-.faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
-
-@media (max-width: 1024px) {
-  .srv-detail { grid-template-columns: 1fr; gap: 40px; }
-  .srv-detail.reverse { direction: ltr; }
-  .srv-img { height: 260px; }
-  .process-steps { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 768px) {
-  .process-steps { grid-template-columns: 1fr 1fr; }
-}
-</style>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/service.css">
 </head>
+
 <body>
 <div id="progress-bar"></div>
 

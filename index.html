@@ -4,272 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fine Modern Homes – We Build The Future</title>
-<link rel="stylesheet" href="style.css">
-<style>
-/* ── HOME-SPECIFIC ── */
-#hero {
-  min-height: 100vh;
-  background: var(--navy);
-  display: grid; grid-template-columns: 1fr 1fr;
-  position: relative; overflow: hidden;
-}
-.hero-left {
-  display: flex; align-items: center;
-  padding: 140px 64px 80px;
-  position: relative; z-index: 2;
-}
-.hero-right {
-  position: relative; overflow: hidden;
-}
-.hero-right img {
-  width: 100%; height: 100%; object-fit: cover;
-  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-}
-.hero-right::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to right, var(--navy) 0%, transparent 30%);
-}
-.hero-lines {
-  position: absolute; inset: 0; z-index: 1;
-  background-image:
-    repeating-linear-gradient(45deg,transparent,transparent 90px,rgba(232,120,10,0.025) 90px,rgba(232,120,10,0.025) 91px);
-}
-.hero-eyebrow {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 0.7rem; letter-spacing: 3.5px; text-transform: uppercase;
-  color: var(--orange); margin-bottom: 22px; font-weight: 600;
-}
-.hero-eyebrow::before { content:''; width:36px; height:2px; background:var(--orange); }
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-.hero-h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(4.5rem, 8vw, 7.5rem);
-  line-height: 0.9; letter-spacing: 2px; margin-bottom: 24px;
-}
-.hero-h1 .line2 { color: var(--orange); }
-
-.hero-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic; font-size: 1.1rem; color: var(--gray);
-  line-height: 1.8; margin-bottom: 44px; max-width: 440px;
-  border-left: 2px solid var(--orange); padding-left: 18px;
-}
-.nav-logo img{
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #f59e0b;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-.nav-logo span{
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-.hero-actions { display: flex; gap: 16px; align-items: center; margin-bottom: 70px; }
-
-.hero-stats {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 2px; border-top: 1px solid var(--border); padding-top: 36px;
-}
-.stat {
-  padding-right: 28px;
-}
-.stat:not(:last-child) { border-right: 1px solid var(--border); margin-right: 28px; }
-.stat-n {
-  font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem;
-  color: var(--orange); line-height: 1;
-}
-.stat-l { font-size: 0.72rem; color: var(--gray); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
-
-/* ── FEATURE STRIP ── */
-.feature-strip {
-  background: var(--orange);
-  padding: 22px 64px;
-  display: flex; align-items: center; justify-content: center;
-  gap: 60px; flex-wrap: wrap;
-}
-.feat-item {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px;
-  text-transform: uppercase; color: rgba(255,255,255,0.9);
-}
-.feat-item span { font-size: 1.2rem; }
-
-/* ── HOME SECTIONS ── */
-.intro-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; align-items: center;
-}
-.intro-images {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-  position: relative;
-}
-.intro-images img {
-  width: 100%; height: 220px; object-fit: cover;
-  border-radius: 2px; display: block;
-  transition: transform 0.5s;
-}
-.intro-images img:hover { transform: scale(1.03); }
-.intro-images img:first-child { height: 300px; grid-column: 1/3; }
-.exp-badge {
-  position: absolute; bottom: -16px; right: -16px;
-  background: var(--orange); padding: 18px 22px;
-  border-radius: 3px; text-align: center;
-  box-shadow: 0 16px 48px rgba(232,120,10,0.4);
-}
-.exp-badge .n { font-family:'Bebas Neue',sans-serif; font-size: 2.6rem; line-height: 1; }
-.exp-badge .l { font-size: 0.68rem; letter-spacing: 1px; opacity: 0.88; }
-
-/* PILLARS */
-.pillars { margin-top: 38px; display: flex; flex-direction: column; gap: 16px; }
-.pillar {
-  display: flex; align-items: flex-start; gap: 16px;
-  padding: 20px 22px; background: var(--navy-card);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--orange); border-radius: 2px;
-  transition: transform var(--transition);
-}
-.pillar:hover { transform: translateX(6px); }
-.pillar-icon { font-size: 1.4rem; flex-shrink: 0; }
-.pillar-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 3px; }
-.pillar-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.65; }
-
-/* SERVICES PREVIEW */
-.srv-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 2px; margin-top: 60px;
-}
-.srv-card {
-  background: var(--navy-card); padding: 38px 24px;
-  border: 1px solid var(--border); position: relative; overflow: hidden;
-  transition: transform var(--transition), border-color var(--transition);
-  text-decoration: none; color: var(--white);
-  display: flex; flex-direction: column;
-}
-.srv-card::after {
-  content: ''; position: absolute; bottom: 0; left: 0;
-  width: 100%; height: 3px; background: var(--orange);
-  transform: scaleX(0); transform-origin: left; transition: transform var(--transition);
-}
-.srv-card:hover { transform: translateY(-8px); border-color: rgba(232,120,10,0.25); }
-.srv-card:hover::after { transform: scaleX(1); }
-.srv-ico {
-  width: 52px; height: 52px; margin-bottom: 18px;
-  background: rgba(232,120,10,0.1); border-radius: 3px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.5rem;
-}
-.srv-name { font-family:'Bebas Neue',sans-serif; font-size: 1.05rem; letter-spacing: 1px; margin-bottom: 8px; }
-.srv-desc { font-size: 0.8rem; color: var(--gray); line-height: 1.7; flex: 1; }
-.srv-arrow { margin-top: 18px; color: var(--orange); font-size: 1.1rem; transition: transform 0.3s; }
-.srv-card:hover .srv-arrow { transform: translateX(5px); }
-
-/* PROJECTS PREVIEW */
-.proj-mosaic {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 280px 280px;
-  gap: 10px; margin-top: 60px;
-}
-.proj-tile {
-  position: relative; overflow: hidden; border-radius: 2px;
-  cursor: pointer;
-}
-.proj-tile:first-child { grid-row: 1 / 3; }
-.proj-tile img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.6s; display: block;
-}
-.proj-tile:hover img { transform: scale(1.07); }
-.proj-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(8,19,29,0.92) 0%, transparent 55%);
-  display: flex; align-items: flex-end; padding: 22px;
-  opacity: 0; transition: opacity 0.4s;
-}
-.proj-tile:hover .proj-overlay { opacity: 1; }
-.proj-label { font-family:'Bebas Neue',sans-serif; font-size: 1.1rem; letter-spacing: 1px; }
-.proj-meta { font-size: 0.75rem; color: var(--orange); margin-top: 2px; }
-
-/* TESTIMONIAL STRIP */
-.test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 60px; }
-.test-card {
-  background: var(--navy-card); padding: 34px;
-  border: 1px solid var(--border); border-radius: 2px;
-  border-top: 3px solid transparent;
-  transition: border-color var(--transition), transform var(--transition);
-}
-.test-card:hover { border-top-color: var(--orange); transform: translateY(-4px); }
-.stars { color: var(--orange); font-size: 0.78rem; margin-bottom: 14px; letter-spacing: 2px; }
-.test-q {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 1rem; line-height: 1.85; color: rgba(255,255,255,0.78);
-  margin-bottom: 22px;
-}
-.test-author { display: flex; align-items: center; gap: 12px; }
-.avatar {
-  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
-  background: linear-gradient(135deg, var(--orange), var(--orange-glow));
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
-}
-.author-name { font-weight: 600; font-size: 0.87rem; }
-.author-loc { font-size: 0.74rem; color: var(--gray); margin-top: 2px; }
-
-/* CTA BAND */
-.cta-band {
-  background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy-light) 100%);
-  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-  padding: 80px 64px;
-  display: grid; grid-template-columns: 1fr auto;
-  align-items: center; gap: 60px;
-}
-.cta-band h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1;
-}
-.cta-band h2 em { color: var(--orange); font-style: normal; }
-.cta-band p { color: var(--gray); margin-top: 10px; font-size: 0.92rem; }
-.cta-actions { display: flex; gap: 14px; flex-shrink: 0; }
-
-/* SCROLL INDICATOR */
-.scroll-hint {
-  position: absolute; bottom: 36px; left: 64px; z-index: 3;
-  display: flex; align-items: center; gap: 10px;
-  font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray);
-}
-.scroll-hint-line { width: 40px; height: 1px; background: var(--orange); animation: blink 2s infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
-
-@media (max-width: 1024px) {
-  #hero { grid-template-columns: 1fr; }
-  .hero-right { display: none; }
-  .hero-left { padding: 130px 32px 64px; }
-  .srv-grid { grid-template-columns: repeat(3,1fr); }
-  .intro-grid { grid-template-columns: 1fr; gap: 48px; }
-  .proj-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 240px 240px 240px; }
-  .proj-tile:first-child { grid-row: 1; grid-column: 1/3; }
-  .cta-band { grid-template-columns: 1fr; text-align: center; }
-  .cta-actions { justify-content: center; }
-  .feature-strip { gap: 32px; }
-}
-@media (max-width: 768px) {
-  .hero-h1 { font-size: 4rem; }
-  .hero-actions { flex-wrap: wrap; }
-  .hero-stats { grid-template-columns: 1fr 1fr 1fr; }
-  .srv-grid { grid-template-columns: 1fr 1fr; }
-  .proj-mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
-  .proj-tile:first-child { grid-column: 1; grid-row: auto; }
-  .proj-tile img { min-height: 220px; }
-  .test-grid { grid-template-columns: 1fr; }
-  .feature-strip { gap: 18px; padding: 18px 20px; }
-  .cta-band { padding: 56px 20px; }
-}
-</style>
 </head>
 <body>
 
@@ -346,14 +84,13 @@
     Scroll to explore
   </div>
 </section>
-
 <!-- FEATURE STRIP -->
 <div class="feature-strip">
-  <div class="feat-item"><span>🏆</span> Premium Quality Materials</div>
-  <div class="feat-item"><span>⏱️</span> On-Time Delivery</div>
-  <div class="feat-item"><span>💰</span> Affordable Pricing</div>
-  <div class="feat-item"><span>👷</span> Expert Team</div>
-  <div class="feat-item"><span>📞</span> 0749 557 566</div>
+  <div class="feat-item"><i class="fas fa-award"></i> Premium Quality Materials</div>
+  <div class="feat-item"><i class="fas fa-clock"></i> On-Time Delivery</div>
+  <div class="feat-item"><i class="fas fa-dollar-sign"></i> Affordable Pricing</div>
+  <div class="feat-item"><i class="fas fa-hard-hat"></i> Expert Team</div>
+  <div class="feat-item"><i class="fas fa-phone-alt"></i> 0749 557 566</div>
 </div>
 
 <!-- INTRO / WHO WE ARE -->
@@ -374,10 +111,41 @@
         <h2 class="heading">We Build <em>Dream Homes</em> You Deserve</h2>
         <p class="body-text">Fine Modern Homes is Tanzania's trusted construction partner — blending timeless design with affordable innovation. Every project we undertake is a promise to exceed expectations.</p>
         <div class="pillars">
-          <div class="pillar"><div class="pillar-icon">🏆</div><div><div class="pillar-name">Quality Materials</div><p class="pillar-desc">Certified, premium materials for lasting structural integrity.</p></div></div>
-          <div class="pillar"><div class="pillar-icon">👷</div><div><div class="pillar-name">Expert Team</div><p class="pillar-desc">Skilled professionals committed to excellence on every project.</p></div></div>
-          <div class="pillar"><div class="pillar-icon">💰</div><div><div class="pillar-name">Affordable Prices</div><p class="pillar-desc">Best value for your investment — premium results, fair costs.</p></div></div>
-        </div>
+         <div class="pillar">
+  <div class="pillar-icon">
+    <i class="fas fa-award"></i>
+  </div>
+  <div>
+    <div class="pillar-name">Quality Materials</div>
+    <p class="pillar-desc">
+      Certified, premium materials for lasting structural integrity.
+    </p>
+  </div>
+</div>
+
+<div class="pillar">
+  <div class="pillar-icon">
+    <i class="fas fa-hard-hat"></i>
+  </div>
+  <div>
+    <div class="pillar-name">Expert Team</div>
+    <p class="pillar-desc">
+      Skilled professionals committed to excellence on every project.
+    </p>
+  </div>
+</div>
+
+<div class="pillar">
+  <div class="pillar-icon">
+    <i class="fas fa-dollar-sign"></i>
+  </div>
+  <div>
+    <div class="pillar-name">Affordable Prices</div>
+    <p class="pillar-desc">
+      Best value for your investment — premium results, fair costs.
+    </p>
+  </div>
+</div>
         <div style="margin-top: 32px;">
           <a href="about.html" class="btn btn-primary">Learn More About Us</a>
         </div>
@@ -394,38 +162,64 @@
       <h2 class="heading">End-to-End <em>Construction</em> Solutions</h2>
       <p class="body-text" style="max-width:540px;margin:0 auto">From concept to completion — we handle every phase with precision and care.</p>
     </div>
-    <div class="srv-grid">
-      <a href="services.html#design" class="srv-card reveal d1">
-        <div class="srv-ico">🏠</div>
-        <div class="srv-name">House Design</div>
-        <p class="srv-desc">Modern & classic architectural designs tailored to your needs.</p>
-        <div class="srv-arrow">→</div>
-      </a>
-      <a href="services.html#construction" class="srv-card reveal d2">
-        <div class="srv-ico">🏗️</div>
-        <div class="srv-name">Construction</div>
-        <p class="srv-desc">Quality construction with attention to every structural detail.</p>
-        <div class="srv-arrow">→</div>
-      </a>
-      <a href="services.html#materials" class="srv-card reveal d3">
-        <div class="srv-ico">🧱</div>
-        <div class="srv-name">Building Materials</div>
-        <p class="srv-desc">Premium quality materials at competitive, affordable prices.</p>
-        <div class="srv-arrow">→</div>
-      </a>
-      <a href="services.html#renovation" class="srv-card reveal d4">
-        <div class="srv-ico">🎨</div>
-        <div class="srv-name">Renovation</div>
-        <p class="srv-desc">Upgrade your spaces with contemporary modern style.</p>
-        <div class="srv-arrow">→</div>
-      </a>
-      <a href="services.html#pm" class="srv-card reveal d5">
-        <div class="srv-ico">📋</div>
-        <div class="srv-name">Project Management</div>
-        <p class="srv-desc">Professional delivery on time and within budget.</p>
-        <div class="srv-arrow">→</div>
-      </a>
+   <div class="srv-grid">
+
+  <a href="services.html#design" class="srv-card reveal d1">
+    <div class="srv-ico">
+      <i class="fas fa-house"></i>
     </div>
+    <div class="srv-name">House Design</div>
+    <p class="srv-desc">
+      Modern & classic architectural designs tailored to your needs.
+    </p>
+    <div class="srv-arrow">→</div>
+  </a>
+
+  <a href="services.html#construction" class="srv-card reveal d2">
+    <div class="srv-ico">
+      <i class="fas fa-building"></i>
+    </div>
+    <div class="srv-name">Construction</div>
+    <p class="srv-desc">
+      Quality construction with attention to every structural detail.
+    </p>
+    <div class="srv-arrow">→</div>
+  </a>
+
+  <a href="services.html#materials" class="srv-card reveal d3">
+    <div class="srv-ico">
+      <i class="fas fa-cubes"></i>
+    </div>
+    <div class="srv-name">Building Materials</div>
+    <p class="srv-desc">
+      Premium quality materials at competitive, affordable prices.
+    </p>
+    <div class="srv-arrow">→</div>
+  </a>
+
+  <a href="services.html#renovation" class="srv-card reveal d4">
+    <div class="srv-ico">
+      <i class="fas fa-paint-roller"></i>
+    </div>
+    <div class="srv-name">Renovation</div>
+    <p class="srv-desc">
+      Upgrade your spaces with contemporary modern style.
+    </p>
+    <div class="srv-arrow">→</div>
+  </a>
+
+  <a href="services.html#pm" class="srv-card reveal d5">
+    <div class="srv-ico">
+      <i class="fas fa-clipboard-list"></i>
+    </div>
+    <div class="srv-name">Project Management</div>
+    <p class="srv-desc">
+      Professional delivery on time and within budget.
+    </p>
+    <div class="srv-arrow">→</div>
+  </a>
+
+</div>
   </div>
 </section>
 
@@ -535,12 +329,35 @@
     </div>
     <div class="footer-col">
       <h5>Contact</h5>
-      <ul>
-        <li><a href="tel:0715172686">📞 0749 557 566</a></li>
-        <li><a href="#">📍 Dar Es Salaam, Tanzania</a></li>
-        <li><a href="#">🕘 Mon–Sat: 8AM – 6PM</a></li>
-        <li><a href="https://wa.me/255749557566">💬 WhatsApp Us</a></li>
-      </ul>
+     <ul>
+  <li>
+    <a href="tel:0749557566">
+      <i class="fas fa-phone-alt"></i>
+      0749 557 566
+    </a>
+  </li>
+
+  <li>
+    <a href="#">
+      <i class="fas fa-location-dot"></i>
+      Dar Es Salaam, Tanzania
+    </a>
+  </li>
+
+  <li>
+    <a href="#">
+      <i class="fas fa-clock"></i>
+      Mon–Sat: 8AM – 6PM
+    </a>
+  </li>
+
+  <li>
+    <a href="https://wa.me/255749557566">
+      <i class="fab fa-whatsapp"></i>
+      WhatsApp Us
+    </a>
+  </li>
+</ul>
     </div>
   </div>
   <div class="footer-bottom container">
