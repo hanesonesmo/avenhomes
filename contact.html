@@ -4,302 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact Us - Aven Homes</title>
-<link rel="stylesheet" href="style.css">
-<style>
-/* ===== CONTACT PAGE STYLES ===== */
-.contact-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 0;
-  min-height: 80vh;
-}
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/service.css">
+<link rel="stylesheet" href="css/project.css">  
+<link rel="stylesheet" href="css/contact.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-/* LEFT INFO PANEL */
-.nav-logo img{
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #f59e0b; /* gold accent */
-}
-.nav-logo span{
-    font-size: 20px;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: 2px;
-}
-.contact-panel {
-  background: var(--navy-light);
-  padding: 70px 56px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.contact-panel::before {
-  content: "";
-  position: absolute; bottom: -60px; left: -60px;
-  width: 320px; height: 320px;
-  border-radius: 50%;
-  background: rgba(232,120,10,0.07);
-}
-.contact-panel::after {
-  content: "";
-  position: absolute; top: -40px; right: -40px;
-  width: 200px; height: 200px;
-  border-radius: 50%;
-  background: rgba(232,120,10,0.05);
-}
-.cp-tagline {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-size: 1.15rem;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.8;
-  margin-bottom: 48px;
-  max-width: 340px;
-}
-.contact-items { display: flex; flex-direction: column; gap: 32px; position: relative; z-index: 1; }
-.citem {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-}
-.citem-icon {
-  width: 52px; height: 52px;
-  background: rgba(232,120,10,0.12);
-  border: 1px solid rgba(232,120,10,0.25);
-  border-radius: 3px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem;
-  flex-shrink: 0;
-  transition: background var(--transition);
-}
-.citem:hover .citem-icon { background: rgba(232,120,10,0.22); }
-.citem-label {
-  font-size: 0.68rem; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--orange);
-  margin-bottom: 5px; font-weight: 600;
-}
-.citem-val {
-  font-size: 1rem; font-weight: 500; margin-bottom: 2px;
-}
-.citem-sub { font-size: 0.8rem; color: var(--gray); }
-.citem-val a { color: var(--white); text-decoration: none; transition: color var(--transition); }
-.citem-val a:hover { color: var(--orange); }
 
-.social-row {
-  display: flex; gap: 12px; margin-top: 48px;
-  position: relative; z-index: 1;
-}
-.soc-btn {
-  width: 44px; height: 44px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; text-decoration: none;
-  transition: background var(--transition), border-color var(--transition);
-  cursor: pointer;
-}
-.soc-btn:hover { background: var(--orange); border-color: var(--orange); }
-
-/* RIGHT FORM PANEL */
-.contact-form-wrap {
-  background: var(--navy-mid);
-  padding: 70px 64px;
-}
-.form-heading {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 2.2rem; letter-spacing: 1.5px;
-  margin-bottom: 8px;
-}
-.form-heading em { color: var(--orange); font-style: normal; }
-.form-sub {
-  font-size: 0.88rem; color: var(--gray);
-  margin-bottom: 42px; line-height: 1.7;
-}
-
-.interest-chips {
-  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px;
-}
-.chip {
-  padding: 9px 18px;
-  border: 1.5px solid var(--border);
-  border-radius: 30px;
-  font-size: 0.78rem; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--gray);
-  cursor: pointer;
-  transition: all var(--transition);
-  background: transparent;
-  font-family: "DM Sans", sans-serif;
-}
-.chip:hover, .chip.active {
-  border-color: var(--orange);
-  color: var(--orange);
-  background: rgba(232,120,10,0.08);
-}
-
-.form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.char-count {
-  font-size: 0.72rem; color: var(--gray);
-  text-align: right; margin-top: 5px;
-}
-
-.submit-wrap { margin-top: 10px; }
-.submit-btn {
-  width: 100%; padding: 17px;
-  background: var(--orange); color: var(--white);
-  border: none; border-radius: 2px;
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.85rem; font-weight: 600;
-  letter-spacing: 2px; text-transform: uppercase;
-  cursor: pointer;
-  transition: all var(--transition);
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-}
-.submit-btn:hover {
-  background: var(--orange-glow);
-  transform: translateY(-2px);
-  box-shadow: 0 14px 40px rgba(232,120,10,0.35);
-}
-.submit-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
-
-.form-note {
-  display: flex; align-items: flex-start; gap: 8px;
-  font-size: 0.78rem; color: var(--gray);
-  margin-top: 14px; line-height: 1.6;
-}
-.form-note span { color: var(--orange); font-size: 1rem; flex-shrink: 0; }
-
-/* SUCCESS STATE */
-.success-state {
-  display: none;
-  text-align: center;
-  padding: 60px 20px;
-}
-.success-circle {
-  width: 80px; height: 80px;
-  background: rgba(232,120,10,0.12);
-  border: 2px solid var(--orange);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2rem; margin: 0 auto 24px;
-  animation: popIn 0.5s cubic-bezier(0.16,1,0.3,1);
-}
-@keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-.success-state h3 {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 2.2rem; letter-spacing: 1px;
-  color: var(--orange); margin-bottom: 12px;
-}
-.success-state p { color: var(--gray); font-size: 0.92rem; line-height: 1.7; max-width: 420px; margin: 0 auto 28px; }
-
-/* MAP SECTION */
-.map-section { background: var(--navy); }
-.map-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  overflow: hidden;
-}
-.map-embed {
-  height: 420px;
-  background: var(--navy-card);
-  position: relative;
-  overflow: hidden;
-}
-.map-embed iframe {
-  width: 100%; height: 100%; border: none;
-  filter: grayscale(30%) invert(5%);
-}
-.map-info {
-  padding: 48px 44px;
-  background: var(--navy-card);
-  display: flex; flex-direction: column; justify-content: center;
-}
-.map-info h3 {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 1.7rem; letter-spacing: 1px; margin-bottom: 24px;
-}
-.map-info h3 em { color: var(--orange); font-style: normal; }
-.dir-item {
-  display: flex; align-items: flex-start; gap: 14px;
-  margin-bottom: 20px;
-}
-.dir-ico {
-  width: 36px; height: 36px;
-  background: rgba(232,120,10,0.1);
-  border-radius: 3px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; flex-shrink: 0;
-}
-.dir-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 3px; }
-.dir-val { font-size: 0.88rem; color: rgba(255,255,255,0.8); line-height: 1.6; }
-
-/* QUICK CONTACT CARDS */
-.quick-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 16px; margin-top: 60px;
-}
-.quick-card {
-  background: var(--navy-card);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 36px 28px;
-  text-align: center;
-  text-decoration: none;
-  color: var(--white);
-  transition: transform var(--transition), border-color var(--transition);
-  display: block;
-}
-.quick-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(232,120,10,0.35);
-}
-.qc-icon {
-  font-size: 2.2rem; margin-bottom: 14px;
-  display: block;
-}
-.qc-label {
-  font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--orange); margin-bottom: 8px; font-weight: 600;
-}
-.qc-val { font-weight: 600; font-size: 1.05rem; margin-bottom: 6px; }
-.qc-sub { font-size: 0.78rem; color: var(--gray); }
-
-/* FAQ STRIP */
-.faq-strip { background: var(--navy-light); }
-.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
-.faq-card {
-  background: var(--navy-mid);
-  padding: 28px 30px;
-  border: 1px solid var(--border);
-  transition: border-color var(--transition);
-}
-.faq-card:hover { border-color: rgba(232,120,10,0.25); }
-.faq-q2 { font-weight: 600; font-size: 0.92rem; margin-bottom: 10px; }
-.faq-a2 { font-size: 0.82rem; color: var(--gray); line-height: 1.75; }
-
-@media (max-width: 1024px) {
-  .contact-layout { grid-template-columns: 1fr; }
-  .contact-panel { padding: 50px 32px; }
-  .contact-form-wrap { padding: 50px 32px; }
-  .map-grid { grid-template-columns: 1fr; }
-  .map-embed { height: 280px; }
-  .quick-grid { grid-template-columns: 1fr 1fr; }
-  .faq-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 768px) {
-  .form-grid-2 { grid-template-columns: 1fr; }
-  .quick-grid { grid-template-columns: 1fr; }
-  .contact-form-wrap { padding: 36px 20px; }
-  .contact-panel { padding: 40px 20px; }
-}
-</style>
 </head>
 <body>
 <div id="progress-bar"></div>
@@ -347,55 +58,127 @@
     <h2 class="heading" style="margin-bottom:16px">Let's Start <em>Building</em></h2>
     <p class="cp-tagline">"Every great home starts with a conversation. We're ready to listen and bring your vision to life."</p>
     <div class="contact-items">
-      <div class="citem">
-        <div class="citem-icon">&#128222;</div>
-        <div>
-          <div class="citem-label">Phone</div>
-          <div class="citem-val"><a href="tel:0715172686">0749 557 566</a></div>
-          <div class="citem-sub">Call us Mon&ndash;Sat, 8AM&ndash;6PM</div>
-        </div>
-      </div>
-      <div class="citem">
-        <div class="citem-icon">&#128172;</div>
-        <div>
-          <div class="citem-label">WhatsApp</div>
-          <div class="citem-val"><a href="https://wa.me/255749557566" target="_blank">+255 715 172 686</a></div>
-          <div class="citem-sub">Chat with us instantly</div>
-        </div>
-      </div>
-      <div class="citem">
-        <div class="citem-icon">&#128140;</div>
-        <div>
-          <div class="citem-label">Email</div>
-          <div class="citem-val"><a href="mailto:info@avenhomes.co.tz">info@avenhomes.co.tz</a></div>
-          <div class="citem-sub">We reply within 24 hours</div>
-        </div>
-      </div>
-      <div class="citem">
-        <div class="citem-icon">&#128205;</div>
-        <div>
-          <div class="citem-label">Office</div>
-          <div class="citem-val">Dar Es Salaam, Tanzania</div>
-          <div class="citem-sub">Serving all of Tanzania</div>
-        </div>
-      </div>
-      <div class="citem">
-        <div class="citem-icon">&#128336;</div>
-        <div>
-          <div class="citem-label">Working Hours</div>
-          <div class="citem-val">Mon &ndash; Saturday</div>
-          <div class="citem-sub">8:00 AM &ndash; 6:00 PM EAT</div>
-        </div>
-      </div>
+
+  <div class="citem">
+    <div class="citem-icon">
+      <i class="fas fa-phone-alt"></i>
     </div>
-    <div class="social-row">
-      <a href="#" class="soc-btn" title="Facebook">&#128241;</a>
-      <a href="#" class="soc-btn" title="Instagram">&#128247;</a>
-      <a href="https://wa.me/255749557566" class="soc-btn" title="WhatsApp" target="_blank">&#128172;</a>
-      <a href="mailto:info@avenhomes.co.tz" class="soc-btn" title="Email">&#128140;</a>
+
+    <div>
+      <div class="citem-label">Phone</div>
+
+      <div class="citem-val">
+        <a href="tel:0749557566">0749 557 566</a>
+      </div>
+
+      <div class="citem-sub">
+        Call us Mon–Sat, 8AM–6PM
+      </div>
     </div>
   </div>
 
+  <div class="citem">
+    <div class="citem-icon">
+      <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <div>
+      <div class="citem-label">WhatsApp</div>
+
+      <div class="citem-val">
+        <a href="https://wa.me/255749557566" target="_blank">
+          +255 749 557 566
+        </a>
+      </div>
+
+      <div class="citem-sub">
+        Chat with us instantly
+      </div>
+    </div>
+  </div>
+
+  <div class="citem">
+    <div class="citem-icon">
+      <i class="fas fa-envelope"></i>
+    </div>
+
+    <div>
+      <div class="citem-label">Email</div>
+
+      <div class="citem-val">
+        <a href="mailto:info@avenhomes.co.tz">
+          info@avenhomes.co.tz
+        </a>
+      </div>
+
+      <div class="citem-sub">
+        We reply within 24 hours
+      </div>
+    </div>
+  </div>
+
+  <div class="citem">
+    <div class="citem-icon">
+      <i class="fas fa-location-dot"></i>
+    </div>
+
+    <div>
+      <div class="citem-label">Office</div>
+
+      <div class="citem-val">
+        Dar Es Salaam, Tanzania
+      </div>
+
+      <div class="citem-sub">
+        Serving all of Tanzania
+      </div>
+    </div>
+  </div>
+
+  <div class="citem">
+    <div class="citem-icon">
+      <i class="fas fa-clock"></i>
+    </div>
+
+    <div>
+      <div class="citem-label">Working Hours</div>
+
+      <div class="citem-val">
+        Mon – Saturday
+      </div>
+
+      <div class="citem-sub">
+        8:00 AM – 6:00 PM EAT
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="social-row">
+
+  <a href="#" class="soc-btn" title="Facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="#" class="soc-btn" title="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://wa.me/255749557566"
+     class="soc-btn"
+     title="WhatsApp"
+     target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="mailto:info@avenhomes.co.tz"
+     class="soc-btn"
+     title="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+
+</div>
   <!-- FORM PANEL -->
   <div class="contact-form-wrap reveal-r">
     <div id="formContent">
@@ -496,25 +279,35 @@
       <h2 class="heading">Reach Us <em>Directly</em></h2>
     </div>
     <div class="quick-grid">
-      <a href="tel:0715172686" class="quick-card reveal d1">
-        <span class="qc-icon">&#128222;</span>
-        <div class="qc-label">Call Us</div>
-        <div class="qc-val">0749 557 566</div>
-        <div class="qc-sub">Mon&ndash;Sat, 8AM&ndash;6PM</div>
-      </a>
-      <a href="https://wa.me/255749557566" target="_blank" class="quick-card reveal d2">
-        <span class="qc-icon">&#128172;</span>
-        <div class="qc-label">WhatsApp</div>
-        <div class="qc-val">Chat Instantly</div>
-        <div class="qc-sub">+255 749 557 566</div>
-      </a>
-      <a href="mailto:info@avenhomes.co.tz" class="quick-card reveal d3">
-        <span class="qc-icon">&#128140;</span>
-        <div class="qc-label">Email</div>
-        <div class="qc-val">info@avenhomes.co.tz</div>
-        <div class="qc-sub">Reply within 24 hours</div>
-      </a>
-    </div>
+
+  <a href="tel:0749557566" class="quick-card reveal d1">
+    <span class="qc-icon">
+      <i class="fas fa-phone-alt"></i>
+    </span>
+    <div class="qc-label">Call Us</div>
+    <div class="qc-val">0749 557 566</div>
+    <div class="qc-sub">Mon–Sat, 8AM–6PM</div>
+  </a>
+
+  <a href="https://wa.me/255749557566" target="_blank" class="quick-card reveal d2">
+    <span class="qc-icon">
+      <i class="fab fa-whatsapp"></i>
+    </span>
+    <div class="qc-label">WhatsApp</div>
+    <div class="qc-val">Chat Instantly</div>
+    <div class="qc-sub">+255 749 557 566</div>
+  </a>
+
+  <a href="mailto:info@avenhomes.co.tz" class="quick-card reveal d3">
+    <span class="qc-icon">
+      <i class="fas fa-envelope"></i>
+    </span>
+    <div class="qc-label">Email</div>
+    <div class="qc-val">info@avenhomes.co.tz</div>
+    <div class="qc-sub">Reply within 24 hours</div>
+  </a>
+
+</div>
   </div>
 </section>
 
@@ -533,27 +326,40 @@
         </iframe>
       </div>
       <div class="map-info">
-        <h3>Visit Our <em>Office</em></h3>
-        <div class="dir-item">
-          <div class="dir-ico">&#128205;</div>
-          <div>
-            <div class="dir-label">Address</div>
-            <div class="dir-val">Dar Es Salaam, Tanzania<br>East Africa</div>
-          </div>
-        </div>
-        <div class="dir-item">
-          <div class="dir-ico">&#128336;</div>
-          <div>
-            <div class="dir-label">Office Hours</div>
-            <div class="dir-val">Monday &ndash; Saturday<br>8:00 AM &ndash; 6:00 PM EAT</div>
-          </div>
-        </div>
-        <div class="dir-item">
-          <div class="dir-ico">&#128648;</div>
-          <div>
-            <div class="dir-label">Site Visits</div>
-            <div class="dir-val">Available by appointment<br>across all of Tanzania</div>
-          </div>
+
+  <h3>Visit Our <em>Office</em></h3>
+
+  <div class="dir-item">
+    <div class="dir-ico">
+      <i class="fas fa-location-dot"></i>
+    </div>
+    <div>
+      <div class="dir-label">Address</div>
+      <div class="dir-val">Dar Es Salaam, Tanzania<br>East Africa</div>
+    </div>
+  </div>
+
+  <div class="dir-item">
+    <div class="dir-ico">
+      <i class="fas fa-clock"></i>
+    </div>
+    <div>
+      <div class="dir-label">Office Hours</div>
+      <div class="dir-val">Monday – Saturday<br>8:00 AM – 6:00 PM EAT</div>
+    </div>
+  </div>
+
+  <div class="dir-item">
+    <div class="dir-ico">
+      <i class="fas fa-route"></i>
+    </div>
+    <div>
+      <div class="dir-label">Site Visits</div>
+      <div class="dir-val">Available by appointment<br>across all of Tanzania</div>
+    </div>
+  </div>
+
+</div>
         </div>
         <div style="margin-top:28px">
           <a href="https://wa.me/255715172686?text=Hello%2C%20I%20want%20to%20book%20a%20site%20visit" target="_blank" class="btn btn-primary">Book a Site Visit &#10132;</a>
@@ -571,10 +377,21 @@
       <h2 class="heading">Quick <em>Answers</em></h2>
     </div>
     <div class="faq-grid">
-      <div class="faq-card reveal d1"><div class="faq-q2">How quickly will you respond to my message?</div><p class="faq-a2">We typically respond to all messages within 24 hours on business days. For urgent matters, call or WhatsApp us directly for an instant response.</p></div>
-      <div class="faq-card reveal d2"><div class="faq-q2">Do you provide free quotations?</div><p class="faq-a2">Yes! Initial consultations and quotations are completely free. We will assess your project and provide a detailed, transparent estimate with no obligation.</p></div>
-      <div class="faq-card reveal d3"><div class="faq-q2">Can you visit my plot before quoting?</div><p class="faq-a2">Absolutely. For construction projects, we prefer to conduct a site visit to give you the most accurate and tailored quotation possible.</p></div>
-      <div class="faq-card reveal d4"><div class="faq-q2">Do you work outside Dar Es Salaam?</div><p class="faq-a2">Yes, we serve all regions of Tanzania including Arusha, Mwanza, Dodoma, Mbeya, and beyond. Travel costs are included in project quotes.</p></div>
+      <div class="faq-card reveal d1">
+        <div class="faq-q2">How quickly will you respond to my message?</div>
+        <p class="faq-a2">We typically respond to all messages within 24 hours on business days. For urgent matters, call or WhatsApp us directly for an instant response.</p></div>
+
+      <div class="faq-card reveal d2">
+        <div class="faq-q2">Do you provide free quotations?</div>
+        <p class="faq-a2">Yes! Initial consultations and quotations are completely free. We will assess your project and provide a detailed, transparent estimate with no obligation.</p></div>
+
+      <div class="faq-card reveal d3">
+        <div class="faq-q2">Can you visit my plot before quoting?</div>
+        <p class="faq-a2">Absolutely. For construction projects, we prefer to conduct a site visit to give you the most accurate and tailored quotation possible.</p></div>
+        
+        <div class="faq-card reveal d4">
+        <div class="faq-q2">Do you work outside Dar Es Salaam?</div>
+        <p class="faq-a2">Yes, we serve all regions of Tanzania including Arusha, Mwanza, Dodoma, Mbeya, and beyond. Travel costs are included in project quotes.</p></div>
     </div>
   </div>
 </section>
@@ -600,17 +417,45 @@
       <li><a href="reviews.html">Reviews</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul></div>
-    <div class="footer-col"><h5>Contact</h5><ul>
-      <li><a href="tel:0715172686">&#128222; 0715 172 686</a></li>
-      <li><a href="https://wa.me/255749557566">&#128172; WhatsApp</a></li>
-      <li><a href="mailto:info@avenhomes.co.tz">&#128140; Email Us</a></li>
-      <li><a href="#">&#128205; Dar Es Salaam, TZ</a></li>
-    </ul></div>
+    <div class="footer-col"><h5>Contact</h5>
+     <ul>
+  <li>
+    <a href="tel:0715172686">
+      <i class="fas fa-phone-alt"></i>
+      0715 172 686
+    </a>
+  </li>
+
+  <li>
+    <a href="https://wa.me/255749557566">
+      <i class="fab fa-whatsapp"></i>
+      WhatsApp
+    </a>
+  </li>
+
+  <li>
+    <a href="mailto:info@avenhomes.co.tz">
+      <i class="fas fa-envelope"></i>
+      Email Us
+    </a>
+  </li>
+
+  <li>
+    <a href="#">
+      <i class="fas fa-location-dot"></i>
+      Dar Es Salaam, TZ
+    </a>
+  </li>
+</ul>
+  </div>
   </div>
   <div class="footer-bottom container">
-    <span>&copy; 2025 <em>Aven Homes</em>. All rights reserved.</span>
-    <span>Built with &#10084; in Tanzania</span>
-  </div>
+  <span>&copy; 2025 <em>Aven Homes</em>. All rights reserved.</span>
+
+  <span>
+    Built with <i class="fas fa-heart"></i> in Tanzania
+  </span>
+</div>
 </footer>
 
 <a href="https://wa.me/255715172686" class="wa-btn" target="_blank" title="Chat on WhatsApp">&#128172;</a>

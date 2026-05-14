@@ -31,28 +31,42 @@
     color: #ffffff;
     letter-spacing: 2px;
 }
-
 .exp-badge{
     position:absolute;
     bottom:-18px;
     right:-18px;
+
+    width:120px;
+    height:120px;
+
     background:var(--orange);
-    padding:20px 24px;
-    border-radius:3px;
+
+    border-radius:50%;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
     text-align:center;
-    box-shadow:0 16px 48px rgba(232,120,10,.4)
+
+    z-index:10;
+
+    box-shadow:0 16px 48px rgba(232,120,10,.4);
 }
 
 .exp-badge .n{
-    font-family:Bebas Neue,sans-serif;
-    font-size:2.8rem;
-    line-height:1
+    font-family:'Bebas Neue',sans-serif;
+    font-size:2.5rem;
+    line-height:1;
+    color:#fff;
 }
 
 .exp-badge .l{
-    font-size:.68rem;
+    font-size:.7rem;
     letter-spacing:1px;
-    opacity:.9
+    color:#fff;
+    margin-top:4px;
 }
 
 .iq{
@@ -84,22 +98,46 @@
 .vc:hover{
     transform:translateY(-8px);border-color:rgba(232,120,10,.3)
 }
-
-.vi{
-    font-size:2rem;
-    margin-bottom:14px
+.vi {
+  width: 62px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(232,120,10,0.1);
+  border-radius: 50%;
+  margin-bottom: 14px;
+  transition:
+    background var(--transition),
+    transform var(--transition);
 }
 
-.vn{
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:1.15rem;
-    letter-spacing:1px;
-    margin-bottom:10px
+.vi i {
+  font-size: 1.4rem;
+  color: var(--orange);
+  transition: color var(--transition);
 }
 
-.vd{font-size:.82rem;
-    color:var(--gray);
-    line-height:1.75
+.vc:hover .vi {
+  background: var(--orange);
+  transform: translateY(-5px);
+}
+
+.vc:hover .vi i {
+  color: var(--white);
+}
+
+.vn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.vd {
+  font-size: .82rem;
+  color: var(--gray);
+  line-height: 1.75;
 }
 
 .sband{
